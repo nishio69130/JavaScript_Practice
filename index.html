@@ -158,11 +158,17 @@
         .easy-button:hover {
             background-color: #45a049;
         }
-        .difficult-button {
+        .normal-button {
             background-color: #f44336; /* Red */
         }
-        .difficult-button:hover {
+        .normal-button:hover {
             background-color: #e53935;
+        }
+        .difficult-button {
+            background-color: #ff9800; /* Orange */
+        }
+        .difficult-button:hover {
+            background-color: #fb8c00;
         }
     </style>
 </head>
@@ -209,7 +215,6 @@
                     <option value="check">条件チェック</option>
                 </select>
                 <button id="sortButton">メソッド名でソート</button>
-                <title>プログラミングメソッド一覧と練習問題</title>
             </div>
             <h1>プログラミングメソッド一覧</h1>
             <p>各メソッドの隣の列にあるボタンをクリックすると、練習問題タブが開き、練習問題とその解答が表示されます。</p>
@@ -231,6 +236,7 @@
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.push('ぶどう');</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('push()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('push()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('push()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -241,6 +247,7 @@
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.pop();</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('pop()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('pop()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('pop()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -251,6 +258,7 @@
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.shift();</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('shift()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('shift()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('shift()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -261,6 +269,7 @@
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.unshift('ぶどう');</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('unshift()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('unshift()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('unshift()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -271,6 +280,7 @@
                         <td><code>let arr = [1, 2, 3];<br>let newArr = arr.map(x => x * 2);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('map()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('map()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('map()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -281,6 +291,7 @@
                         <td><code>let arr = [1, 2, 3, 4];<br>let newArr = arr.filter(x => x % 2 === 0);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('filter()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('filter()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('filter()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -291,6 +302,7 @@
                         <td><code>let arr = [1, 2, 3, 4];<br>let hasEven = arr.some(x => x % 2 === 0);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('some()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('some()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('some()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -301,6 +313,7 @@
                         <td><code>let arr = [1, 2, 3, 4];<br>let allEven = arr.every(x => x % 2 === 0);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('every()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('every()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('every()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -311,6 +324,7 @@
                         <td><code>let arr = [1, 2, 3, 4];<br>let total = arr.reduce((sum, x) => sum + x, 0);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('reduce()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('reduce()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('reduce()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -321,6 +335,7 @@
                         <td><code>let arr = [1, [2, [3, 4]], 5];<br>let flatArr = arr.flat(2);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('flat()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('flat()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('flat()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -331,6 +346,7 @@
                         <td><code>let arr = [5, 3, 8, 1];<br>arr.sort((a, b) => a - b);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('sort()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('sort()', 'normal')">Normal</button>
                             <button class="difficult-button" onclick="showPracticeQuestion('sort()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
@@ -345,6 +361,7 @@
                         <th>メソッド</th>
                         <th>説明</th>
                         <th>スクリプト例</th>
+                        <th>練習問題</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -352,26 +369,61 @@
                         <td>getRange()</td>
                         <td>指定した範囲のRangeオブジェクトを取得する</td>
                         <td><code>function getRangeExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>}</code></td>
-                    </tr>
-                    <tr>
-                        <td>getValue()</td>
-                        <td>セルの値を取得する</td>
-                        <td><code>function getValueExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1");<br>  let value = range.getValue();<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getRange()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getRange()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getRange()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>setValue()</td>
                         <td>セルに値をセットする</td>
                         <td><code>function setValueExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1");<br>  range.setValue("Hello");<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('setValue()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('setValue()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('setValue()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>getValues()</td>
                         <td>範囲内の全ての値を2次元配列として取得する</td>
                         <td><code>function getValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>  let values = range.getValues();<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getValues()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getValues()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getValues()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
                         <td>setValues()</td>
                         <td>範囲内に2次元配列の値をセットする</td>
                         <td><code>function setValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B2");<br>  range.setValues([["A", "B"], ["C", "D"]]);<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('setValues()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('setValues()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('setValues()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getLastRow()</td>
+                        <td>シートの最後の行を取得する</td>
+                        <td><code>function getLastRowExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let lastRow = sheet.getLastRow();<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getLastRow()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getLastRow()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getLastRow()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>appendRow()</td>
+                        <td>シートの末尾に新しい行を追加する</td>
+                        <td><code>function appendRowExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  sheet.appendRow(["New Entry"]);<br>}</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('appendRow()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('appendRow()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('appendRow()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -520,7 +572,7 @@
 }`,
                         explanation: 'push() メソッドを使用して、配列の末尾に "バナナ" を追加しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 fruits に "バナナ" を追加し、その後 "バナナ" を削除してください。<br>例: let fruits = ["りんご", "オレンジ"];',
                         answer: `function addAndRemoveBanana() {
   let fruits = ["りんご", "オレンジ"];
@@ -530,6 +582,23 @@
   console.log(fruits);
 }`,
                         explanation: 'push() メソッドを使用して、配列の末尾に "バナナ" を追加し、その後 pop() メソッドを使用して "バナナ" を削除しています。'
+                    },
+                    difficult: {
+                        question: 'ネストされた配列 nestedArray を受け取り、全ての要素をフラットにして、それぞれの要素を2倍にした配列を返してください。配列の深さは不定で、再帰的にフラットにする必要があります。<br>例: let nestedArray = [1, [2, [3, [4]], 5]];',
+                        answer: `function flattenAndDouble(arr) {
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val)) {
+      return acc.concat(flattenAndDouble(val));
+    } else {
+      return acc.concat(val * 2);
+    }
+  }, []);
+}
+
+// 使用例
+let nestedArray = [1, [2, [3, [4]], 5]];
+console.log(flattenAndDouble(nestedArray)); // [2, 4, 6, 8, 10]`,
+                        explanation: 'reduce() メソッドを使用して、ネストされた配列を再帰的にフラットにし、各要素を2倍にしています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素が配列であるかどうかをチェックし、配列であれば再帰的にフラットにし、そうでなければ要素を2倍にして結果の配列に追加します。'
                     }
                 },
                 'pop()': {
@@ -543,7 +612,7 @@
 }`,
                         explanation: 'pop() メソッドを使用して、配列の最後の要素を削除し、その要素を変数に格納しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers の最後の要素を削除し、その要素を表示した後、配列の最初の要素を削除してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
                         answer: `function removeLastAndFirstNumber() {
   let numbers = [1, 2, 3, 4, 5];
@@ -555,6 +624,17 @@
   console.log("残りの配列: " + numbers);
 }`,
                         explanation: 'pop() メソッドを使用して、配列の最後の要素を削除し、その後 shift() メソッドを使用して配列の最初の要素を削除しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、全ての要素を3倍にして、その合計を返してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function tripleAndSum(arr) {
+  return arr.reduce((acc, val) => acc + val * 3, 0);
+}
+
+// 使用例
+let numbers = [1, 2, 3, 4, 5];
+console.log(tripleAndSum(numbers)); // 45`,
+                        explanation: 'reduce() メソッドを使用して、配列の全ての要素を3倍にし、その合計を計算しています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素を3倍にし、その合計を計算して結果を返します。'
                     }
                 },
                 'shift()': {
@@ -568,7 +648,7 @@
 }`,
                         explanation: 'shift() メソッドを使用して、配列の最初の要素を削除し、その要素を変数に格納しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 fruits の最初の要素を削除し、その要素を表示した後、配列の末尾にその要素を追加してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
                         answer: `function removeFirstAndAddToEnd() {
   let fruits = ["りんご", "バナナ", "オレンジ"];
@@ -579,6 +659,22 @@
   console.log("更新された配列: " + fruits);
 }`,
                         explanation: 'shift() メソッドを使用して、配列の最初の要素を削除し、その後 push() メソッドを使用してその要素を配列の末尾に追加しています。'
+                    },
+                    difficult: {
+                        question: '配列 fruits を受け取り、最初の要素を削除し、その要素を配列の末尾に追加し、さらに配列の長さが5未満の場合は "追加された要素" を配列の末尾に追加してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function modifyAndExtendArray(arr) {
+  let firstElement = arr.shift();
+  arr.push(firstElement);
+  if (arr.length < 5) {
+    arr.push("追加された要素");
+  }
+  return arr;
+}
+
+// 使用例
+let fruits = ["りんご", "バナナ", "オレンジ"];
+console.log(modifyAndExtendArray(fruits)); // ["バナナ", "オレンジ", "りんご", "追加された要素"]`,
+                        explanation: 'shift() メソッドを使用して配列の最初の要素を削除し、その要素を配列の末尾に追加します。その後、配列の長さが5未満の場合は "追加された要素" を配列の末尾に追加します。'
                     }
                 },
                 'unshift()': {
@@ -591,7 +687,7 @@
 }`,
                         explanation: 'unshift() メソッドを使用して、配列の先頭に "ぶどう" を追加しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 fruits の先頭に "ぶどう" を追加し、その後 "ぶどう" を削除してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
                         answer: `function addAndRemoveGrapes() {
   let fruits = ["りんご", "バナナ", "オレンジ"];
@@ -601,6 +697,18 @@
   console.log(fruits);
 }`,
                         explanation: 'unshift() メソッドを使用して、配列の先頭に "ぶどう" を追加し、その後 shift() メソッドを使用して "ぶどう" を削除しています。'
+                    },
+                    difficult: {
+                        question: '配列 fruits を受け取り、先頭に "ぶどう" を追加し、その後配列の全ての要素を逆順に並び替えてください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function addGrapesAndReverse(arr) {
+  arr.unshift("ぶどう");
+  return arr.reverse();
+}
+
+// 使用例
+let fruits = ["りんご", "バナナ", "オレンジ"];
+console.log(addGrapesAndReverse(fruits)); // ["オレンジ", "バナナ", "りんご", "ぶどう"]`,
+                        explanation: 'unshift() メソッドを使用して配列の先頭に "ぶどう" を追加し、その後 reverse() メソッドを使用して配列の全ての要素を逆順に並び替えます。'
                     }
                 },
                 'map()': {
@@ -613,7 +721,7 @@
 }`,
                         explanation: 'map() メソッドを使用して、配列の各要素を2倍にした新しい配列を作成しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers の各要素を2倍にした新しい配列を作成し、その配列の合計を計算してください。<br>例: let numbers = [1, 2, 3, 4];',
                         answer: `function doubleAndSumNumbers() {
   let numbers = [1, 2, 3, 4];
@@ -623,6 +731,18 @@
   console.log(total);
 }`,
                         explanation: 'map() メソッドを使用して、配列の各要素を2倍にした新しい配列を作成し、その後 reduce() メソッドを使用してその配列の合計を計算しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、各要素を3倍にし、その後偶数のみを含む新しい配列を作成してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function tripleAndFilterEven(arr) {
+  let tripled = arr.map(x => x * 3);
+  return tripled.filter(x => x % 2 === 0);
+}
+
+// 使用例
+let numbers = [1, 2, 3, 4, 5];
+console.log(tripleAndFilterEven(numbers)); // [6, 12]`,
+                        explanation: 'map() メソッドを使用して配列の各要素を3倍にし、その後 filter() メソッドを使用して偶数のみを含む新しい配列を作成します。map() メソッドは、配列の各要素に対して指定された関数を実行し、新しい配列を生成します。filter() メソッドは、配列の各要素に対して指定された条件を満たす要素のみを含む新しい配列を生成します。'
                     }
                 },
                 'filter()': {
@@ -635,7 +755,7 @@
 }`,
                         explanation: 'filter() メソッドを使用して、配列から偶数のみを含む新しい配列を作成しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers から偶数のみを含む新しい配列を作成し、その配列の各要素を2倍にしてください。<br>例: let numbers = [1, 2, 3, 4, 5, 6];',
                         answer: `function filterAndDoubleEvenNumbers() {
   let numbers = [1, 2, 3, 4, 5, 6];
@@ -645,6 +765,18 @@
   console.log(doubledEvens);
 }`,
                         explanation: 'filter() メソッドを使用して、配列から偶数のみを含む新しい配列を作成し、その後 map() メソッドを使用してその配列の各要素を2倍にしています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、奇数のみを含む新しい配列を作成し、その配列の各要素を2乗にしてください。<br>例: let numbers = [1, 2, 3, 4, 5, 6];',
+                        answer: `function filterAndSquareOddNumbers(arr) {
+  let odds = arr.filter(x => x % 2 !== 0);
+  return odds.map(x => x * x);
+}
+
+// 使用例
+let numbers = [1, 2, 3, 4, 5, 6];
+console.log(filterAndSquareOddNumbers(numbers)); // [1, 9, 25]`,
+                        explanation: 'filter() メソッドを使用して配列から奇数のみを含む新しい配列を作成し、その後 map() メソッドを使用してその配列の各要素を2乗にします。filter() メソッドは、配列の各要素に対して指定された条件を満たす要素のみを含む新しい配列を生成します。map() メソッドは、配列の各要素に対して指定された関数を実行し、新しい配列を生成します。'
                     }
                 },
                 'some()': {
@@ -657,7 +789,7 @@
 }`,
                         explanation: 'some() メソッドを使用して、配列に偶数が含まれているかどうかをチェックしています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers に偶数が含まれているかどうかをチェックし、含まれている場合はその偶数を表示してください。<br>例: let numbers = [1, 3, 5, 7, 8];',
                         answer: `function hasAndShowEvenNumber() {
   let numbers = [1, 3, 5, 7, 8];
@@ -669,6 +801,22 @@
   }
 }`,
                         explanation: 'some() メソッドを使用して、配列に偶数が含まれているかどうかをチェックし、含まれている場合は filter() メソッドを使用してその偶数を表示しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、全ての要素が3の倍数であるかどうかをチェックし、そうでない場合は3の倍数のみを含む新しい配列を作成してください。<br>例: let numbers = [3, 6, 9, 12, 15];',
+                        answer: `function checkAndFilterMultiplesOfThree(arr) {
+  let allMultiplesOfThree = arr.every(x => x % 3 === 0);
+  console.log(allMultiplesOfThree);
+  if (!allMultiplesOfThree) {
+    return arr.filter(x => x % 3 === 0);
+  }
+  return arr;
+}
+
+// 使用例
+let numbers = [3, 6, 9, 12, 15];
+console.log(checkAndFilterMultiplesOfThree(numbers)); // [3, 6, 9, 12, 15]`,
+                        explanation: 'some() メソッドを使用して配列の全ての要素が3の倍数であるかどうかをチェックし、そうでない場合は filter() メソッドを使用して3の倍数のみを含む新しい配列を作成します。some() メソッドは、配列の各要素に対して指定された条件を満たす要素が少なくとも1つ存在するかどうかをチェックします。filter() メソッドは、配列の各要素に対して指定された条件を満たす要素のみを含む新しい配列を生成します。'
                     }
                 },
                 'every()': {
@@ -681,7 +829,7 @@
 }`,
                         explanation: 'every() メソッドを使用して、配列の全ての要素が偶数かどうかをチェックしています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers の全ての要素が偶数かどうかをチェックし、全て偶数でない場合は偶数のみを含む新しい配列を作成してください。<br>例: let numbers = [2, 4, 6, 7];',
                         answer: `function checkAndFilterEvenNumbers() {
   let numbers = [2, 4, 6, 7];
@@ -693,6 +841,22 @@
   }
 }`,
                         explanation: 'every() メソッドを使用して、配列の全ての要素が偶数かどうかをチェックし、全て偶数でない場合は filter() メソッドを使用して偶数のみを含む新しい配列を作成しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、全ての要素が正の数であるかどうかをチェックし、そうでない場合は正の数のみを含む新しい配列を作成してください。<br>例: let numbers = [1, -2, 3, -4, 5];',
+                        answer: `function checkAndFilterPositiveNumbers(arr) {
+  let allPositive = arr.every(x => x > 0);
+  console.log(allPositive);
+  if (!allPositive) {
+    return arr.filter(x => x > 0);
+  }
+  return arr;
+}
+
+// 使用例
+let numbers = [1, -2, 3, -4, 5];
+console.log(checkAndFilterPositiveNumbers(numbers)); // [1, 3, 5]`,
+                        explanation: 'every() メソッドを使用して配列の全ての要素が正の数であるかどうかをチェックし、そうでない場合は filter() メソッドを使用して正の数のみを含む新しい配列を作成します。every() メソッドは、配列の各要素に対して指定された条件を全ての要素が満たすかどうかをチェックします。filter() メソッドは、配列の各要素に対して指定された条件を満たす要素のみを含む新しい配列を生成します。'
                     }
                 },
                 'reduce()': {
@@ -705,7 +869,7 @@
 }`,
                         explanation: 'reduce() メソッドを使用して、配列の合計を計算しています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers の合計を計算し、その合計が10以上の場合は "合計は10以上です" と表示してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
                         answer: `function sumAndCheckNumbers() {
   let numbers = [1, 2, 3, 4, 5];
@@ -716,6 +880,17 @@
   }
 }`,
                         explanation: 'reduce() メソッドを使用して、配列の合計を計算し、その合計が10以上の場合はメッセージを表示しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、全ての要素を2乗にして、その合計を返してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function squareAndSum(arr) {
+  return arr.reduce((acc, val) => acc + val * val, 0);
+}
+
+// 使用例
+let numbers = [1, 2, 3, 4, 5];
+console.log(squareAndSum(numbers)); // 55`,
+                        explanation: 'reduce() メソッドを使用して、配列の全ての要素を2乗にし、その合計を計算しています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素を2乗にし、その合計を計算して結果を返します。'
                     }
                 },
                 'flat()': {
@@ -728,7 +903,7 @@
 }`,
                         explanation: 'flat() メソッドを使用して、ネストされた配列をフラットにしています。'
                     },
-                    difficult: {
+                    normal: {
                         question: 'ネストされた配列 nestedArray をフラットにし、その後各要素を2倍にしてください。<br>例: let nestedArray = [1, [2, [3, 4]], 5];',
                         answer: `function flattenAndDoubleArray() {
   let nestedArray = [1, [2, [3, 4]], 5];
@@ -738,6 +913,23 @@
   console.log(doubledArray);
 }`,
                         explanation: 'flat() メソッドを使用して、ネストされた配列をフラットにし、その後 map() メソッドを使用して各要素を2倍にしています。'
+                    },
+                    difficult: {
+                        question: 'ネストされた配列 nestedArray を受け取り、全ての要素をフラットにして、それぞれの要素を3倍にした配列を返してください。配列の深さは不定で、再帰的にフラットにする必要があります。<br>例: let nestedArray = [1, [2, [3, [4]], 5]];',
+                        answer: `function flattenAndTriple(arr) {
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val)) {
+      return acc.concat(flattenAndTriple(val));
+    } else {
+      return acc.concat(val * 3);
+    }
+  }, []);
+}
+
+// 使用例
+let nestedArray = [1, [2, [3, [4]], 5]];
+console.log(flattenAndTriple(nestedArray)); // [3, 6, 9, 12, 15]`,
+                        explanation: 'reduce() メソッドを使用して、ネストされた配列を再帰的にフラットにし、各要素を3倍にしています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素が配列であるかどうかをチェックし、配列であれば再帰的にフラットにし、そうでなければ要素を3倍にして結果の配列に追加します。'
                     }
                 },
                 'sort()': {
@@ -750,7 +942,7 @@
 }`,
                         explanation: 'sort() メソッドを使用して、配列を昇順に並び替えています。'
                     },
-                    difficult: {
+                    normal: {
                         question: '配列 numbers を昇順に並び替え、その後降順に並び替えてください。<br>例: let numbers = [5, 3, 8, 1];',
                         answer: `function sortAndReverseNumbers() {
   let numbers = [5, 3, 8, 1];
@@ -760,6 +952,93 @@
   console.log(numbers);
 }`,
                         explanation: 'sort() メソッドを使用して、配列を昇順に並び替え、その後降順に並び替えています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を受け取り、各要素を2倍にしてから昇順に並び替え、その後降順に並び替えてください。<br>例: let numbers = [5, 3, 8, 1];',
+                        answer: `function doubleAndSortNumbers(arr) {
+  let doubled = arr.map(x => x * 2);
+  doubled.sort((a, b) => a - b);
+  console.log(doubled);
+  doubled.sort((a, b) => b - a);
+  console.log(doubled);
+}
+
+// 使用例
+let numbers = [5, 3, 8, 1];
+doubleAndSortNumbers(numbers); // [16, 10, 6, 2]`,
+                        explanation: 'map() メソッドを使用して配列の各要素を2倍にし、その後 sort() メソッドを使用して昇順に並び替え、さらに降順に並び替えます。map() メソッドは、配列の各要素に対して指定された関数を実行し、新しい配列を生成します。sort() メソッドは、配列の要素を指定された順序で並び替えます。'
+                    }
+                },
+                'getRange()': {
+                    easy: {
+                        question: 'スプレッドシートのアクティブシートにあるセル "A1" に「Hello, World!」という値を設定してください。',
+                        answer: `function setHelloWorld() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  let range = sheet.getRange("A1");
+  range.setValue("Hello, World!");
+}`,
+                        explanation: 'getRange("A1") メソッドを使ってセル "A1" を取得し、setValue() メソッドを用いてそのセルに「Hello, World!」という値を設定しています。'
+                    },
+                    normal: {
+                        question: 'スプレッドシートのアクティブシートにあるセル "B2" に現在の日付を設定し、セル "C2" に「Updated on」と記載してください。',
+                        answer: `function setDateAndText() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  let dateRange = sheet.getRange("B2");
+  let textRange = sheet.getRange("C2");
+  
+  dateRange.setValue(new Date());
+  textRange.setValue("Updated on");
+}`,
+                        explanation: 'getRange() メソッドでセル "B2" と "C2" を取得し、"B2" には new Date() を用いて現在の日付を、"C2" には「Updated on」というテキストをそれぞれ設定しています。'
+                    }
+                },
+                'getValues()': {
+                    easy: {
+                        question: 'スプレッドシートのアクティブシートの範囲 "A1:B2" に「A」「B」「C」「D」の値を2次元配列として設定してください。',
+                        answer: `function setRangeValues() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  let range = sheet.getRange("A1:B2");
+  range.setValues([
+    ["A", "B"],
+    ["C", "D"]
+  ]);
+}`,
+                        explanation: 'setValues() メソッドを使用して、2次元配列 [["A", "B"], ["C", "D"]] を範囲 "A1:B2" に設定しています。'
+                    },
+                    normal: {
+                        question: 'スプレッドシートのアクティブシートにある範囲 "A1:B5" の値を取得し、全てのセルの値を大文字に変換してから同じ範囲に再度設定してください。',
+                        answer: `function convertToUppercase() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  let range = sheet.getRange("A1:B5");
+  let values = range.getValues();
+  
+  // 全ての値を大文字に変換
+  let uppercaseValues = values.map(row => row.map(cell => {
+    return typeof cell === 'string' ? cell.toUpperCase() : cell;
+  }));
+  
+  range.setValues(uppercaseValues);
+}`,
+                        explanation: 'getValues() メソッドで範囲 "A1:B5" の値を取得し、map() 関数を使用して文字列のみを大文字に変換しています。その後、setValues() メソッドを使って変換後の値を同じ範囲に設定しています。'
+                    }
+                },
+                'getLastRow()': {
+                    easy: {
+                        question: 'スプレッドシートのアクティブシートの末尾に新しい行を追加し、「New Entry」という値を追加してください。',
+                        answer: `function addNewEntry() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  sheet.appendRow(["New Entry"]);
+}`,
+                        explanation: 'appendRow() メソッドを使用して、新しい行を追加し、その行に「New Entry」という値を設定しています。'
+                    },
+                    normal: {
+                        question: 'スプレッドシートのアクティブシートの最後の行に、現在の時刻と「新しいエントリ」を追加してください。',
+                        answer: `function addTimestampAndEntry() {
+  let sheet = SpreadsheetApp.getActiveSheet();
+  let timestamp = new Date();
+  sheet.appendRow([timestamp, "新しいエントリ"]);
+}`,
+                        explanation: 'appendRow() メソッドを使用し、現在の時刻（new Date()）と「新しいエントリ」というテキストを新しい行に追加しています。'
                     }
                 }
             };

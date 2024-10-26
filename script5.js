@@ -34,8 +34,32 @@
 // fruits.splice(1, 1, "banana");
 // console.log(fruits);
 
-let numbers = [1, 2, 3, 4, 5, 6];
-let evenNumbers = numbers.filter(num => num % 2 ===0);
-console.log(evenNumbers);
-let doubleEvenNumbers = evenNumbers.map(num => num *2);
-console.log(doubleEvenNumbers);
+// let numbers = [1, 2, 3, 4, 5, 6];
+// let evenNumbers = numbers.filter(num => num % 2 ===0);
+// console.log(evenNumbers);
+// let doubleEvenNumbers = evenNumbers.map(num => num *2);
+// console.log(doubleEvenNumbers);
+
+// let nestedArray = [1, [2, [3, 4]], 5];
+// let newArray = nestedArray.flat(2);
+// console.log(newArray.map(num => num*2));
+
+// 問題
+// ネストされた配列 nestedArray を受け取り、全ての要素をフラットにして、それぞれの要素を2倍にした配列を返してください。
+// 配列の深さは不定で、再帰的にフラットにする必要があります。
+
+
+let nestedArray = [1, [2, [3, [4]], 5]];
+
+function flattenAndDouble(arr) {
+    return arr.reduce((accumulator, currentValue) => {
+        if(Array.isArray(currentValue)) {
+            return accumulator.concat(flattenAndDouble(currentValue));
+        }else{
+            return accumulator.concat(currentValue *2);
+        }
+    },[])
+}
+
+
+console.log(flattenAndDouble(nestedArray));
