@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f8f8;
+        }
+        code {
+            background-color: #f8f8f8;
+            color: #d63384;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        #controls {
+            margin-bottom: 20px;
+        }
+        #methodTable tr.hidden {
+            display: none;
+        }
+        .tab {
+            overflow: hidden;
+            background-color: #333;
+            display: flex;
+        }
+        .tab button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            color: #fff;
+            flex: 1;
+            text-align: center;
+        }
+        .tab button:hover {
+            background-color: #555;
+        }
+        .tab button.active {
+            background-color: #d63384;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border-top: none;
+            animation: fadeEffect 1s;
+            flex: 1;
+            overflow-y: auto;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        .answer-section {
+            margin-top: 20px;
+        }
+        .collapsible {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
+        .active, .collapsible:hover {
+            background-color: #555;
+        }
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f8f8f8;
+        }
+        .copy-button {
+            float: right;
+            margin-top: 10px;
+            background-color: #d63384;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .subtab {
+            display: none;
+            overflow: hidden;
+            background-color: #222;
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+        }
+        .subtab.show {
+            display: block;
+            max-height: 500px;
+        }
+        .subtab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 12px;
+            transition: 0.3s;
+            color: #fff;
+        }
+        .subtab button:hover {
+            background-color: #444;
+        }
+        .subtab button.active {
+            background-color: #d63384;
+        }
+        select, button {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .easy-button {
+            background-color: #4CAF50; /* Green */
+        }
+        .easy-button:hover {
+            background-color: #45a049;
+        }
+        .difficult-button {
+            background-color: #f44336; /* Red */
+        }
+        .difficult-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'MethodExplanation')">メソッド解説</button>
+            <button class="tablinks" onclick="openTab(event, 'Practice')">練習問題</button>
+        </div>
+
+        <div id="Practice" class="tabcontent">
+            <h1>練習問題</h1>
+            <div id="practiceContent">
+                <h2>問題</h2>
+                <p id="question"></p>
+                <div class="answer-section">
+                    <button class="collapsible">回答と解説を見る</button>
+                    <div class="content">
+                        <button class="copy-button" onclick="copyScript()">スクリプトをコピー</button>
+                        <pre><code id="answer"></code></pre>
+                        <p id="explanation"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="MethodExplanation" class="tabcontent">            
+            <div class="subtab">
+                <button class="subtablinks" onclick="openSubTab(event, 'Array')">配列</button>
+                <button class="subtablinks" onclick="openSubTab(event, 'Spreadsheet')">スプレッドシート</button>
+                <button class="subtablinks" onclick="openSubTab(event, 'Gmail')">Gmail</button>
+            </div>
+        </div>
+
+        <div id="Array" class="subtabcontent">
+            <div id="controls">
+                <label for="functionFilter">機能で絞り込み:</label>
+                <select id="functionFilter">
+                    <option value="all">全て表示</option>
+                    <option value="add">要素の追加</option>
+                    <option value="remove">要素の削除</option>
+                    <option value="search">要素の検索</option>
+                    <option value="transform">配列の変換</option>
+                    <option value="check">条件チェック</option>
+                </select>
+                <button id="sortButton">メソッド名でソート</button>
+                <title>プログラミングメソッド一覧と練習問題</title>
+            </div>
+            <h1>プログラミングメソッド一覧</h1>
+            <p>各メソッドの隣の列にあるボタンをクリックすると、練習問題タブが開き、練習問題とその解答が表示されます。</p>
+            <table id="methodTable">
+                <thead>
+                    <tr>
+                        <th>メソッド</th>
+                        <th>説明</th>
+                        <th>破壊的/非破壊的</th>
+                        <th>スクリプト例</th>
+                        <th>練習問題</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-function="add">
+                        <td>push()</td>
+                        <td>配列の末尾に1つ以上の要素を追加し、新しい配列の長さを返す</td>
+                        <td>破壊的</td>
+                        <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.push('ぶどう');</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('push()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('push()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="remove">
+                        <td>pop()</td>
+                        <td>配列の最後の要素を削除し、その要素を返す</td>
+                        <td>破壊的</td>
+                        <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.pop();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('pop()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('pop()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="remove">
+                        <td>shift()</td>
+                        <td>配列の最初の要素を削除し、その要素を返す</td>
+                        <td>破壊的</td>
+                        <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.shift();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('shift()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('shift()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="add">
+                        <td>unshift()</td>
+                        <td>配列の先頭に1つ以上の要素を追加し、新しい配列の長さを返す</td>
+                        <td>破壊的</td>
+                        <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.unshift('ぶどう');</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('unshift()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('unshift()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="transform">
+                        <td>map()</td>
+                        <td>配列の各要素に対して関数を実行し、新しい配列を返す</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, 2, 3];<br>let newArr = arr.map(x => x * 2);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('map()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('map()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="check">
+                        <td>filter()</td>
+                        <td>条件を満たす要素のみを含む新しい配列を返す</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, 2, 3, 4];<br>let newArr = arr.filter(x => x % 2 === 0);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('filter()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('filter()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="check">
+                        <td>some()</td>
+                        <td>配列の少なくとも1つの要素が条件を満たすかどうかをチェックする</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, 2, 3, 4];<br>let hasEven = arr.some(x => x % 2 === 0);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('some()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('some()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="check">
+                        <td>every()</td>
+                        <td>配列の全ての要素が条件を満たすかどうかをチェックする</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, 2, 3, 4];<br>let allEven = arr.every(x => x % 2 === 0);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('every()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('every()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="transform">
+                        <td>reduce()</td>
+                        <td>配列の各要素に対して関数を実行し、1つの値にまとめる</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, 2, 3, 4];<br>let total = arr.reduce((sum, x) => sum + x, 0);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('reduce()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('reduce()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="transform">
+                        <td>flat()</td>
+                        <td>ネストされた配列を指定した深さまでフラットにする</td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = [1, [2, [3, 4]], 5];<br>let flatArr = arr.flat(2);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('flat()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('flat()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr data-function="transform">
+                        <td>sort()</td>
+                        <td>配列を昇順に並び替える</td>
+                        <td>破壊的</td>
+                        <td><code>let arr = [5, 3, 8, 1];<br>arr.sort((a, b) => a - b);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('sort()', 'easy')">Easy</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('sort()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="Spreadsheet" class="subtabcontent">
+            <table id="spreadsheetMethodTable">
+                <thead>
+                    <tr>
+                        <th>メソッド</th>
+                        <th>説明</th>
+                        <th>スクリプト例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>getRange()</td>
+                        <td>指定した範囲のRangeオブジェクトを取得する</td>
+                        <td><code>function getRangeExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>getValue()</td>
+                        <td>セルの値を取得する</td>
+                        <td><code>function getValueExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1");<br>  let value = range.getValue();<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>setValue()</td>
+                        <td>セルに値をセットする</td>
+                        <td><code>function setValueExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1");<br>  range.setValue("Hello");<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>getValues()</td>
+                        <td>範囲内の全ての値を2次元配列として取得する</td>
+                        <td><code>function getValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>  let values = range.getValues();<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>setValues()</td>
+                        <td>範囲内に2次元配列の値をセットする</td>
+                        <td><code>function setValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B2");<br>  range.setValues([["A", "B"], ["C", "D"]]);<br>}</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="Gmail" class="subtabcontent">
+            <table id="gmailMethodTable">
+                <thead>
+                    <tr>
+                        <th>メソッド</th>
+                        <th>説明</th>
+                        <th>スクリプト例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>GmailApp.getInboxThreads()</td>
+                        <td>受信トレイのスレッドを取得する</td>
+                        <td><code>function getInboxThreadsExample() {<br>  let threads = GmailApp.getInboxThreads();<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>GmailApp.search()</td>
+                        <td>指定した検索クエリに一致するスレッドを検索する</td>
+                        <td><code>function searchEmailsExample() {<br>  let threads = GmailApp.search("from:example@gmail.com");<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>GmailApp.sendEmail()</td>
+                        <td>メールを送信する</td>
+                        <td><code>function sendEmailExample() {<br>  GmailApp.sendEmail("recipient@example.com", "Subject", "Body");<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>GmailThread.getMessages()</td>
+                        <td>スレッド内のメッセージを取得する</td>
+                        <td><code>function getMessagesExample() {<br>  let threads = GmailApp.getInboxThreads();<br>  let messages = threads[0].getMessages();<br>}</code></td>
+                    </tr>
+                    <tr>
+                        <td>GmailMessage.getSubject()</td>
+                        <td>メッセージの件名を取得する</td>
+                        <td><code>function getSubjectExample() {<br>  let threads = GmailApp.getInboxThreads();<br>  let messages = threads[0].getMessages();<br>  let subject = messages[0].getSubject();<br>}</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script src="script5.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const table = document.getElementById('methodTable');
+                const functionFilter = document.getElementById('functionFilter');
+                const sortButton = document.getElementById('sortButton');
+                let sortAscending = true;
+
+                functionFilter.addEventListener('change', function() {
+                    const selectedFunction = this.value;
+                    const rows = table.querySelectorAll('tbody tr');
+
+                    rows.forEach(row => {
+                        if (selectedFunction === 'all' || row.getAttribute('data-function') === selectedFunction) {
+                            row.classList.remove('hidden');
+                        } else {
+                            row.classList.add('hidden');
+                        }
+                    });
+                });
+
+                sortButton.addEventListener('click', function() {
+                    const rows = Array.from(table.querySelectorAll('tbody tr'));
+
+                    rows.sort((a, b) => {
+                        const aMethod = a.querySelector('td').textContent;
+                        const bMethod = b.querySelector('td').textContent;
+                        return sortAscending ? aMethod.localeCompare(bMethod) : bMethod.localeCompare(aMethod);
+                    });
+
+                    sortAscending = !sortAscending;
+                    rows.forEach(row => table.querySelector('tbody').appendChild(row));
+                });
+
+                // 折りたたみ機能の追加
+                var coll = document.getElementsByClassName("collapsible");
+                for (var i = 0; i < coll.length; i++) {
+                    coll[i].addEventListener("click", function() {
+                        this.classList.toggle("active");
+                        var content = this.nextElementSibling;
+                        if (content.style.display === "block") {
+                            content.style.display = "none";
+                        } else {
+                            content.style.display = "block";
+                        }
+                    });
+                }
+            });
+
+            function openTab(evt, tabName) {
+                // すべてのタブコンテンツを非表示にする
+                const tabcontent = document.getElementsByClassName("tabcontent");
+                for (let i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+                // すべてのタブリンクから "active" クラスを削除
+                const tablinks = document.getElementsByClassName("tablinks");
+                for (let i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+
+                // 選択されたタブのコンテンツを表示し、"active" クラスを追加
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+
+                // メソッド解説タブが選択された場合、サブタブを表示
+                if (tabName === 'MethodExplanation') {
+                    document.querySelector('.subtab').classList.add('show');
+                } else {
+                    // それ以外の場合はサブタブを非表示
+                    document.querySelector('.subtab').classList.remove('show');
+                    // ここで、"MethodExplanation" タブを非表示にする
+                    const methodExplanationTab = document.getElementById('MethodExplanation');
+                    if (methodExplanationTab) {
+                        methodExplanationTab.style.display = 'none';
+                    }
+                }
+            }
+
+            function openSubTab(evt, subTabName) {
+                const subtabcontent = document.getElementsByClassName("subtabcontent");
+                for (let i = 0; i < subtabcontent.length; i++) {
+                    subtabcontent[i].style.display = "none";
+                }
+                const subtablinks = document.getElementsByClassName("subtablinks");
+                for (let i = 0; i < subtablinks.length; i++) {
+                    subtablinks[i].className = subtablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(subTabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+
+            const practiceQuestions = {
+                'push()': {
+                    easy: {
+                        question: '配列 fruits に "バナナ" を追加してください。<br>例: let fruits = ["りんご", "オレンジ"];',
+                        answer: `function addBanana() {
+  let fruits = ["りんご", "オレンジ"];
+  fruits.push("バナナ");
+  Logger.log(fruits);
+}`,
+                        explanation: 'push() メソッドを使用して、配列の末尾に "バナナ" を追加しています。'
+                    },
+                    difficult: {
+                        question: '配列 fruits に "バナナ" を追加し、その後 "バナナ" を削除してください。<br>例: let fruits = ["りんご", "オレンジ"];',
+                        answer: `function addAndRemoveBanana() {
+  let fruits = ["りんご", "オレンジ"];
+  fruits.push("バナナ");
+  Logger.log(fruits);
+  fruits.pop();
+  Logger.log(fruits);
+}`,
+                        explanation: 'push() メソッドを使用して、配列の末尾に "バナナ" を追加し、その後 pop() メソッドを使用して "バナナ" を削除しています。'
+                    }
+                },
+                'pop()': {
+                    easy: {
+                        question: '配列 numbers の最後の要素を削除し、その要素を表示してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function removeLastNumber() {
+  let numbers = [1, 2, 3, 4, 5];
+  let lastNumber = numbers.pop();
+  Logger.log("削除された要素: " + lastNumber);
+  Logger.log("残りの配列: " + numbers);
+}`,
+                        explanation: 'pop() メソッドを使用して、配列の最後の要素を削除し、その要素を変数に格納しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers の最後の要素を削除し、その要素を表示した後、配列の最初の要素を削除してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function removeLastAndFirstNumber() {
+  let numbers = [1, 2, 3, 4, 5];
+  let lastNumber = numbers.pop();
+  Logger.log("削除された要素: " + lastNumber);
+  Logger.log("残りの配列: " + numbers);
+  let firstNumber = numbers.shift();
+  Logger.log("削除された最初の要素: " + firstNumber);
+  Logger.log("残りの配列: " + numbers);
+}`,
+                        explanation: 'pop() メソッドを使用して、配列の最後の要素を削除し、その後 shift() メソッドを使用して配列の最初の要素を削除しています。'
+                    }
+                },
+                'shift()': {
+                    easy: {
+                        question: '配列 fruits の最初の要素を削除し、その要素を表示してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function removeFirstFruit() {
+  let fruits = ["りんご", "バナナ", "オレンジ"];
+  let firstFruit = fruits.shift();
+  Logger.log("削除された要素: " + firstFruit);
+  Logger.log("残りの配列: " + fruits);
+}`,
+                        explanation: 'shift() メソッドを使用して、配列の最初の要素を削除し、その要素を変数に格納しています。'
+                    },
+                    difficult: {
+                        question: '配列 fruits の最初の要素を削除し、その要素を表示した後、配列の末尾にその要素を追加してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function removeFirstAndAddToEnd() {
+  let fruits = ["りんご", "バナナ", "オレンジ"];
+  let firstFruit = fruits.shift();
+  Logger.log("削除された要素: " + firstFruit);
+  Logger.log("残りの配列: " + fruits);
+  fruits.push(firstFruit);
+  Logger.log("更新された配列: " + fruits);
+}`,
+                        explanation: 'shift() メソッドを使用して、配列の最初の要素を削除し、その後 push() メソッドを使用してその要素を配列の末尾に追加しています。'
+                    }
+                },
+                'unshift()': {
+                    easy: {
+                        question: '配列 fruits の先頭に "ぶどう" を追加してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function addGrapes() {
+  let fruits = ["りんご", "バナナ", "オレンジ"];
+  fruits.unshift("ぶどう");
+  Logger.log(fruits);
+}`,
+                        explanation: 'unshift() メソッドを使用して、配列の先頭に "ぶどう" を追加しています。'
+                    },
+                    difficult: {
+                        question: '配列 fruits の先頭に "ぶどう" を追加し、その後 "ぶどう" を削除してください。<br>例: let fruits = ["りんご", "バナナ", "オレンジ"];',
+                        answer: `function addAndRemoveGrapes() {
+  let fruits = ["りんご", "バナナ", "オレンジ"];
+  fruits.unshift("ぶどう");
+  Logger.log(fruits);
+  fruits.shift();
+  Logger.log(fruits);
+}`,
+                        explanation: 'unshift() メソッドを使用して、配列の先頭に "ぶどう" を追加し、その後 shift() メソッドを使用して "ぶどう" を削除しています。'
+                    }
+                },
+                'map()': {
+                    easy: {
+                        question: '配列 numbers の各要素を2倍にした新しい配列を作成してください。<br>例: let numbers = [1, 2, 3, 4];',
+                        answer: `function doubleNumbers() {
+  let numbers = [1, 2, 3, 4];
+  let doubled = numbers.map(x => x * 2);
+  Logger.log(doubled);
+}`,
+                        explanation: 'map() メソッドを使用して、配列の各要素を2倍にした新しい配列を作成しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers の各要素を2倍にした新しい配列を作成し、その配列の合計を計算してください。<br>例: let numbers = [1, 2, 3, 4];',
+                        answer: `function doubleAndSumNumbers() {
+  let numbers = [1, 2, 3, 4];
+  let doubled = numbers.map(x => x * 2);
+  Logger.log(doubled);
+  let total = doubled.reduce((sum, x) => sum + x, 0);
+  Logger.log(total);
+}`,
+                        explanation: 'map() メソッドを使用して、配列の各要素を2倍にした新しい配列を作成し、その後 reduce() メソッドを使用してその配列の合計を計算しています。'
+                    }
+                },
+                'filter()': {
+                    easy: {
+                        question: '配列 numbers から偶数のみを含む新しい配列を作成してください。<br>例: let numbers = [1, 2, 3, 4, 5, 6];',
+                        answer: `function filterEvenNumbers() {
+  let numbers = [1, 2, 3, 4, 5, 6];
+  let evens = numbers.filter(x => x % 2 === 0);
+  Logger.log(evens);
+}`,
+                        explanation: 'filter() メソッドを使用して、配列から偶数のみを含む新しい配列を作成しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers から偶数のみを含む新しい配列を作成し、その配列の各要素を2倍にしてください。<br>例: let numbers = [1, 2, 3, 4, 5, 6];',
+                        answer: `function filterAndDoubleEvenNumbers() {
+  let numbers = [1, 2, 3, 4, 5, 6];
+  let evens = numbers.filter(x => x % 2 === 0);
+  Logger.log(evens);
+  let doubledEvens = evens.map(x => x * 2);
+  Logger.log(doubledEvens);
+}`,
+                        explanation: 'filter() メソッドを使用して、配列から偶数のみを含む新しい配列を作成し、その後 map() メソッドを使用してその配列の各要素を2倍にしています。'
+                    }
+                },
+                'some()': {
+                    easy: {
+                        question: '配列 numbers に偶数が含まれているかどうかをチェックしてください。<br>例: let numbers = [1, 3, 5, 7, 8];',
+                        answer: `function hasEvenNumber() {
+  let numbers = [1, 3, 5, 7, 8];
+  let hasEven = numbers.some(x => x % 2 === 0);
+  Logger.log(hasEven);
+}`,
+                        explanation: 'some() メソッドを使用して、配列に偶数が含まれているかどうかをチェックしています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers に偶数が含まれているかどうかをチェックし、含まれている場合はその偶数を表示してください。<br>例: let numbers = [1, 3, 5, 7, 8];',
+                        answer: `function hasAndShowEvenNumber() {
+  let numbers = [1, 3, 5, 7, 8];
+  let hasEven = numbers.some(x => x % 2 === 0);
+  Logger.log(hasEven);
+  if (hasEven) {
+    let evenNumbers = numbers.filter(x => x % 2 === 0);
+    Logger.log(evenNumbers);
+  }
+}`,
+                        explanation: 'some() メソッドを使用して、配列に偶数が含まれているかどうかをチェックし、含まれている場合は filter() メソッドを使用してその偶数を表示しています。'
+                    }
+                },
+                'every()': {
+                    easy: {
+                        question: '配列 numbers の全ての要素が偶数かどうかをチェックしてください。<br>例: let numbers = [2, 4, 6, 8];',
+                        answer: `function allEvenNumbers() {
+  let numbers = [2, 4, 6, 8];
+  let allEven = numbers.every(x => x % 2 === 0);
+  Logger.log(allEven);
+}`,
+                        explanation: 'every() メソッドを使用して、配列の全ての要素が偶数かどうかをチェックしています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers の全ての要素が偶数かどうかをチェックし、全て偶数でない場合は偶数のみを含む新しい配列を作成してください。<br>例: let numbers = [2, 4, 6, 7];',
+                        answer: `function checkAndFilterEvenNumbers() {
+  let numbers = [2, 4, 6, 7];
+  let allEven = numbers.every(x => x % 2 === 0);
+  Logger.log(allEven);
+  if (!allEven) {
+    let evenNumbers = numbers.filter(x => x % 2 === 0);
+    Logger.log(evenNumbers);
+  }
+}`,
+                        explanation: 'every() メソッドを使用して、配列の全ての要素が偶数かどうかをチェックし、全て偶数でない場合は filter() メソッドを使用して偶数のみを含む新しい配列を作成しています。'
+                    }
+                },
+                'reduce()': {
+                    easy: {
+                        question: '配列 numbers の合計を計算してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function sumNumbers() {
+  let numbers = [1, 2, 3, 4, 5];
+  let total = numbers.reduce((sum, x) => sum + x, 0);
+  Logger.log(total);
+}`,
+                        explanation: 'reduce() メソッドを使用して、配列の合計を計算しています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers の合計を計算し、その合計が10以上の場合は "合計は10以上です" と表示してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
+                        answer: `function sumAndCheckNumbers() {
+  let numbers = [1, 2, 3, 4, 5];
+  let total = numbers.reduce((sum, x) => sum + x, 0);
+  Logger.log(total);
+  if (total >= 10) {
+    Logger.log("合計は10以上です");
+  }
+}`,
+                        explanation: 'reduce() メソッドを使用して、配列の合計を計算し、その合計が10以上の場合はメッセージを表示しています。'
+                    }
+                },
+                'flat()': {
+                    easy: {
+                        question: 'ネストされた配列 nestedArray をフラットにしてください。<br>例: let nestedArray = [1, [2, [3, 4]], 5];',
+                        answer: `function flattenArray() {
+  let nestedArray = [1, [2, [3, 4]], 5];
+  let flatArray = nestedArray.flat(2);
+  Logger.log(flatArray);
+}`,
+                        explanation: 'flat() メソッドを使用して、ネストされた配列をフラットにしています。'
+                    },
+                    difficult: {
+                        question: 'ネストされた配列 nestedArray をフラットにし、その後各要素を2倍にしてください。<br>例: let nestedArray = [1, [2, [3, 4]], 5];',
+                        answer: `function flattenAndDoubleArray() {
+  let nestedArray = [1, [2, [3, 4]], 5];
+  let flatArray = nestedArray.flat(2);
+  Logger.log(flatArray);
+  let doubledArray = flatArray.map(x => x * 2);
+  Logger.log(doubledArray);
+}`,
+                        explanation: 'flat() メソッドを使用して、ネストされた配列をフラットにし、その後 map() メソッドを使用して各要素を2倍にしています。'
+                    }
+                },
+                'sort()': {
+                    easy: {
+                        question: '配列 numbers を昇順に並び替えてください。<br>例: let numbers = [5, 3, 8, 1];',
+                        answer: `function sortNumbers() {
+  let numbers = [5, 3, 8, 1];
+  numbers.sort((a, b) => a - b);
+  Logger.log(numbers);
+}`,
+                        explanation: 'sort() メソッドを使用して、配列を昇順に並び替えています。'
+                    },
+                    difficult: {
+                        question: '配列 numbers を昇順に並び替え、その後降順に並び替えてください。<br>例: let numbers = [5, 3, 8, 1];',
+                        answer: `function sortAndReverseNumbers() {
+  let numbers = [5, 3, 8, 1];
+  numbers.sort((a, b) => a - b);
+  Logger.log(numbers);
+  numbers.sort((a, b) => b - a);
+  Logger.log(numbers);
+}`,
+                        explanation: 'sort() メソッドを使用して、配列を昇順に並び替え、その後降順に並び替えています。'
+                    }
+                }
+            };
+
+            function showPracticeQuestion(methodName, difficulty) {
+                const questionData = practiceQuestions[methodName][difficulty];
+                if (questionData) {
+                    document.getElementById('question').innerHTML = questionData.question;
+                    document.getElementById('answer').textContent = questionData.answer;
+                    document.getElementById('explanation').textContent = questionData.explanation;
+                } else {
+                    document.getElementById('question').textContent = '申し訳ありませんが、この方法の練習問題はまだ用意されていません。';
+                    document.getElementById('answer').textContent = '';
+                    document.getElementById('explanation').textContent = '';
+                }
+                // タブ以外の要素を非表示にする
+                document.querySelectorAll('.tabcontent').forEach(tab => {
+                    if (tab.id !== 'Practice') {
+                        tab.style.display = 'none';
+                    }
+                });
+                document.querySelectorAll('.tab').forEach(tab => {
+                    tab.style.display = 'flex';
+                });
+                // 練習問題タブを表示
+                openTab(event, 'Practice');
+                // 練習問題を上部にスクロール
+                document.getElementById('Practice').scrollIntoView({ behavior: 'smooth' });
+            }
+
+            function copyScript() {
+                const scriptText = document.getElementById('answer').textContent;
+                navigator.clipboard.writeText(scriptText).then(() => {
+                    alert('スクリプトをクリップボードにコピーしました。');
+                });
+            }
+
+            // 初期表示時にメソッド解説タブと配列サブタブを表示
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.tablinks[onclick*="MethodExplanation"]').click();
+                document.querySelector('.subtablinks[onclick*="Array"]').click();
+            });
+        </script>
+    </div>
+</body>
+</html>
