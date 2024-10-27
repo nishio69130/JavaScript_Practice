@@ -49,17 +49,18 @@
 // 配列の深さは不定で、再帰的にフラットにする必要があります。
 
 
-let nestedArray = [1, [2, [3, [4]], 5]];
+// let nestedArray = [1, [2, [3, [4]], 5]];
 
-function flattenAndDouble(arr) {
-    return arr.reduce((accumulator, currentValue) => {
-        if(Array.isArray(currentValue)) {
-            return accumulator.concat(flattenAndDouble(currentValue));
-        }else{
-            return accumulator.concat(currentValue *2);
-        }
-    },[])
-}
+// function flattenAndDouble(arr) {
+//     return arr.reduce((accumulator, currentValue) => {
+//         if(Array.isArray(currentValue)) {
+//             return accumulator.concat(flattenAndDouble(currentValue));
+//         }else{
+//             return accumulator.concat(currentValue *2);
+//         }
+//     },[])
+// }
 
 
-console.log(flattenAndDouble(nestedArray));
+// console.log(flattenAndDouble(nestedArray));
+

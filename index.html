@@ -53,8 +53,11 @@
             display: none;
         }
         .tab {
-            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
             background-color: #333;
+            z-index: 1000;
             display: flex;
         }
         .tab button {
@@ -81,6 +84,7 @@
             animation: fadeEffect 1s;
             flex: 1;
             overflow-y: auto;
+            margin-top: 150px; /* 固定されたタブと #practiceContent の高さに応じて調整 */
         }
         @keyframes fadeEffect {
             from {opacity: 0;}
@@ -170,6 +174,14 @@
         .difficult-button:hover {
             background-color: #fb8c00;
         }
+        #practiceContent {
+            position: fixed;
+            top: 50px; /* タブの高さに応じて調整 */
+            width: 100%;
+            background-color: #fff;
+            z-index: 999;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -231,7 +243,21 @@
                 <tbody>
                     <tr data-function="add">
                         <td>push()</td>
-                        <td>配列の末尾に1つ以上の要素を追加し、新しい配列の長さを返す</td>
+                        <td>
+                            配列の末尾に1つ以上の要素を追加し、新しい配列の長さを返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>push() メソッドは、配列の末尾に1つ以上の要素を追加し、新しい配列の長さを返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = ['りんご', 'バナナ', 'オレンジ'];
+arr.push('ぶどう');
+console.log(arr); // ['りんご', 'バナナ', 'オレンジ', 'ぶどう']
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>push() は破壊的メソッドで、元の配列を変更します。追加された要素の数に応じて配列の長さが変わります。</p>
+                            </div>
+                        </td>
                         <td>破壊的</td>
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.push('ぶどう');</code></td>
                         <td>
@@ -242,7 +268,22 @@
                     </tr>
                     <tr data-function="remove">
                         <td>pop()</td>
-                        <td>配列の最後の要素を削除し、その要素を返す</td>
+                        <td>
+                            配列の最後の要素を削除し、その要素を返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>pop() メソッドは、配列の最後の要素を削除し、その要素を返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = ['りんご', 'バナナ', 'オレンジ'];
+let lastElement = arr.pop();
+console.log(lastElement); // 'オレンジ'
+console.log(arr); // ['りんご', 'バナナ']
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>pop() は破壊的メソッドで、元の配列を変更します。削除された要素を返します。</p>
+                            </div>
+                        </td>
                         <td>破壊的</td>
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.pop();</code></td>
                         <td>
@@ -253,7 +294,22 @@
                     </tr>
                     <tr data-function="remove">
                         <td>shift()</td>
-                        <td>配列の最初の要素を削除し、その要素を返す</td>
+                        <td>
+                            配列の最初の要素を削除し、その要素を返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>shift() メソッドは、配列の最初の要素を削除し、その要素を返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = ['りんご', 'バナナ', 'オレンジ'];
+let firstElement = arr.shift();
+console.log(firstElement); // 'りんご'
+console.log(arr); // ['バナナ', 'オレンジ']
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>shift() は破壊的メソッドで、元の配列を変更します。削除された要素を返します。</p>
+                            </div>
+                        </td>
                         <td>破壊的</td>
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.shift();</code></td>
                         <td>
@@ -264,7 +320,21 @@
                     </tr>
                     <tr data-function="add">
                         <td>unshift()</td>
-                        <td>配列の先頭に1つ以上の要素を追加し、新しい配列の長さを返す</td>
+                        <td>
+                            配列の先頭に1つ以上の要素を追加し、新しい配列の長さを返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>unshift() メソッドは、配列の先頭に1つ以上の要素を追加し、新しい配列の長さを返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = ['りんご', 'バナナ', 'オレンジ'];
+arr.unshift('ぶどう');
+console.log(arr); // ['ぶどう', 'りんご', 'バナナ', 'オレンジ']
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>unshift() は破壊的メソッドで、元の配列を変更します。追加された要素の数に応じて配列の長さが変わります。</p>
+                            </div>
+                        </td>
                         <td>破壊的</td>
                         <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.unshift('ぶどう');</code></td>
                         <td>
@@ -275,7 +345,21 @@
                     </tr>
                     <tr data-function="transform">
                         <td>map()</td>
-                        <td>配列の各要素に対して関数を実行し、新しい配列を返す</td>
+                        <td>
+                            配列の各要素に対して関数を実行し、新しい配列を返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>map() メソッドは、配列の各要素に対して指定された関数を実行し、新しい配列を返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, 2, 3];
+let newArr = arr.map(x => x * 2);
+console.log(newArr); // [2, 4, 6]
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>map() は非破壊的メソッドで、元の配列を変更せず、新しい配列を返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, 2, 3];<br>let newArr = arr.map(x => x * 2);</code></td>
                         <td>
@@ -286,7 +370,21 @@
                     </tr>
                     <tr data-function="check">
                         <td>filter()</td>
-                        <td>条件を満たす要素のみを含む新しい配列を返す</td>
+                        <td>
+                            条件を満たす要素のみを含む新しい配列を返す
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>filter() メソッドは、指定された条件を満たす要素のみを含む新しい配列を返します。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, 2, 3, 4];
+let newArr = arr.filter(x => x % 2 === 0);
+console.log(newArr); // [2, 4]
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>filter() は非破壊的メソッドで、元の配列を変更せず、新しい配列を返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, 2, 3, 4];<br>let newArr = arr.filter(x => x % 2 === 0);</code></td>
                         <td>
@@ -297,7 +395,21 @@
                     </tr>
                     <tr data-function="check">
                         <td>some()</td>
-                        <td>配列の少なくとも1つの要素が条件を満たすかどうかをチェックする</td>
+                        <td>
+                            配列の少なくとも1つの要素が条件を満たすかどうかをチェックする
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>some() メソッドは、配列の少なくとも1つの要素が指定された条件を満たすかどうかをチェックします。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, 2, 3, 4];
+let hasEven = arr.some(x => x % 2 === 0);
+console.log(hasEven); // true
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>some() は非破壊的メソッドで、元の配列を変更せず、条件を満たす要素があるかどうかを真偽値で返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, 2, 3, 4];<br>let hasEven = arr.some(x => x % 2 === 0);</code></td>
                         <td>
@@ -308,7 +420,21 @@
                     </tr>
                     <tr data-function="check">
                         <td>every()</td>
-                        <td>配列の全ての要素が条件を満たすかどうかをチェックする</td>
+                        <td>
+                            配列の全ての要素が条件を満たすかどうかをチェックする
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>every() メソッドは、配列の全ての要素が指定された条件を満たすかどうかをチェックします。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, 2, 3, 4];
+let allEven = arr.every(x => x % 2 === 0);
+console.log(allEven); // false
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>every() は非破壊的メソッドで、元の配列を変更せず、全ての要素が条件を満たすかどうかを真偽値で返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, 2, 3, 4];<br>let allEven = arr.every(x => x % 2 === 0);</code></td>
                         <td>
@@ -319,7 +445,21 @@
                     </tr>
                     <tr data-function="transform">
                         <td>reduce()</td>
-                        <td>配列の各要素に対して関数を実行し、1つの値にまとめる</td>
+                        <td>
+                            配列の各要素に対して関数を実行し、1つの値にまとめる
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>reduce() メソッドは、配列の各要素に対して指定された関数を実行し、1つの値にまとめます。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, 2, 3, 4];
+let total = arr.reduce((sum, x) => sum + x, 0);
+console.log(total); // 10
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>reduce() は非破壊的メソッドで、元の配列を変更せず、単一の結果を返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, 2, 3, 4];<br>let total = arr.reduce((sum, x) => sum + x, 0);</code></td>
                         <td>
@@ -330,7 +470,21 @@
                     </tr>
                     <tr data-function="transform">
                         <td>flat()</td>
-                        <td>ネストされた配列を指定した深さまでフラットにする</td>
+                        <td>
+                            ネストされた配列を指定した深さまでフラットにする
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>flat() メソッドは、ネストされた配列を指定した深さまでフラットにします。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [1, [2, [3, 4]], 5];
+let flatArr = arr.flat(2);
+console.log(flatArr); // [1, 2, 3, 4, 5]
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>flat() は非破壊的メソッドで、元の配列を変更せず、新しいフラットな配列を返します。</p>
+                            </div>
+                        </td>
                         <td>非破壊的</td>
                         <td><code>let arr = [1, [2, [3, 4]], 5];<br>let flatArr = arr.flat(2);</code></td>
                         <td>
@@ -341,7 +495,21 @@
                     </tr>
                     <tr data-function="transform">
                         <td>sort()</td>
-                        <td>配列を昇順に並び替える</td>
+                        <td>
+                            配列を昇順に並び替える
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>sort() メソッドは、配列を昇順に並び替えます。</p>
+                                <h4>使用例</h4>
+                                <pre><code class="language-javascript">
+let arr = [5, 3, 8, 1];
+arr.sort((a, b) => a - b);
+console.log(arr); // [1, 3, 5, 8]
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>sort() は破壊的メソッドで、元の配列を変更します。デフォルトでは文字列としてソートされるため、数値をソートする場合は比較関数を指定する必要があります。</p>
+                            </div>
+                        </td>
                         <td>破壊的</td>
                         <td><code>let arr = [5, 3, 8, 1];<br>arr.sort((a, b) => a - b);</code></td>
                         <td>
@@ -350,16 +518,74 @@
                             <button class="difficult-button" onclick="showPracticeQuestion('sort()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
+                    <tr data-function="transform">
+                        <td>forEach()</td>
+                        <td>
+                            配列の各要素に対して指定された関数を実行する
+                            <button class="collapsible">詳細説明を見る</button>
+                            <div class="content">
+                                <p>forEach のコールバック関数は、引数を1つでも2つでも取ることができます。実際には、最大で3つの引数を取ることができますが、必要に応じて1つだけ、または2つだけ使うことも可能です。</p>
+                                <h4>forEach のコールバック関数が取る3つの引数</h4>
+                                <ul>
+                                    <li><strong>現在の要素（currentValue）</strong>: 配列の現在の要素そのものです。これは必須の引数です。</li>
+                                    <li><strong>インデックス（index）</strong>: 現在の要素が配列の何番目にあるかを示すインデックス番号（0から始まります）。</li>
+                                    <li><strong>元の配列（array）</strong>: forEach が実行されている配列全体です。</li>
+                                </ul>
+                                <h4>使用例</h4>
+                                <p>1つの引数だけを使用する場合:</p>
+                                <pre><code class="language-javascript">
+const numbers = [1, 2, 3, 4];
+numbers.forEach(num => {
+  console.log(num); // 1, 2, 3, 4
+});
+                                </code></pre>
+                                <p>2つの引数を使用する場合（よく使われるパターン）:</p>
+                                <pre><code class="language-javascript">
+const numbers = [1, 2, 3, 4];
+numbers.forEach((num, index) => {
+  console.log(`Index: ${index}, Value: ${num}`);
+});
+// 出力: Index: 0, Value: 1
+// 出力: Index: 1, Value: 2
+// 出力: Index: 2, Value: 3
+// 出力: Index: 3, Value: 4
+                                </code></pre>
+                                <p>3つの引数を使用する場合:</p>
+                                <pre><code class="language-javascript">
+const numbers = [1, 2, 3, 4];
+numbers.forEach((num, index, array) => {
+  console.log(`Value: ${num}, Index: ${index}, Original Array: ${array}`);
+});
+// 出力: Value: 1, Index: 0, Original Array: 1,2,3,4
+// 出力: Value: 2, Index: 1, Original Array: 1,2,3,4
+// 出力: Value: 3, Index: 2, Original Array: 1,2,3,4
+// 出力: Value: 4, Index: 3, Original Array: 1,2,3,4
+                                </code></pre>
+                                <h4>まとめ</h4>
+                                <p>1つの引数（要素）だけを使っても、2つの引数（要素とインデックス）を使っても、どちらも正しい使い方です。必要に応じて、3つ目の引数（元の配列）も使用可能ですが、使わない場合は省略できます。この柔軟性があるため、forEach は配列の操作に便利なメソッドです。</p>
+                            </div>
+                        </td>
+                        <td>非破壊的</td>
+                        <td><code>let arr = ['りんご', 'バナナ', 'オレンジ'];<br>arr.forEach(fruit => console.log(fruit));</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('forEach()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('forEach()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('forEach()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
 
         <div id="Spreadsheet" class="subtabcontent">
-            <table id="spreadsheetMethodTable">
+            <h1>スプレッドシートメソッド一覧</h1>
+            <p>各メソッドの隣の列にあるボタンをクリックすると、練習問題タブが開き、練習問題とその解答が表示されます。</p>
+            <table id="spreadsheetTable">
                 <thead>
                     <tr>
                         <th>メソッド</th>
                         <th>説明</th>
+                        <th>破壊的/非破壊的</th>
                         <th>スクリプト例</th>
                         <th>練習問題</th>
                     </tr>
@@ -367,8 +593,9 @@
                 <tbody>
                     <tr>
                         <td>getRange()</td>
-                        <td>指定した範囲のRangeオブジェクトを取得する</td>
-                        <td><code>function getRangeExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>}</code></td>
+                        <td>指定された範囲のセルを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let range = SpreadsheetApp.getActiveSpreadsheet().getRange('A1:B2');</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('getRange()', 'easy')">Easy</button>
                             <button class="normal-button" onclick="showPracticeQuestion('getRange()', 'normal')">Normal</button>
@@ -376,19 +603,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>setValue()</td>
-                        <td>セルに値をセットする</td>
-                        <td><code>function setValueExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1");<br>  range.setValue("Hello");<br>}</code></td>
-                        <td>
-                            <button class="easy-button" onclick="showPracticeQuestion('setValue()', 'easy')">Easy</button>
-                            <button class="normal-button" onclick="showPracticeQuestion('setValue()', 'normal')">Normal</button>
-                            <button class="difficult-button" onclick="showPracticeQuestion('setValue()', 'difficult')">Difficult</button>
-                        </td>
-                    </tr>
-                    <tr>
                         <td>getValues()</td>
-                        <td>範囲内の全ての値を2次元配列として取得する</td>
-                        <td><code>function getValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B5");<br>  let values = range.getValues();<br>}</code></td>
+                        <td>範囲内のセルの値を2次元配列として取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let values = range.getValues();</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('getValues()', 'easy')">Easy</button>
                             <button class="normal-button" onclick="showPracticeQuestion('getValues()', 'normal')">Normal</button>
@@ -396,9 +614,21 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>setValue()</td>
+                        <td>セルに値を設定する</td>
+                        <td>破壊的</td>
+                        <td><code>range.setValue('Hello, World!');</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('setValue()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('setValue()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('setValue()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>setValues()</td>
-                        <td>範囲内に2次元配列の値をセットする</td>
-                        <td><code>function setValuesExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let range = sheet.getRange("A1:B2");<br>  range.setValues([["A", "B"], ["C", "D"]]);<br>}</code></td>
+                        <td>範囲内のセルに2次元配列の値を設定する</td>
+                        <td>破壊的</td>
+                        <td><code>range.setValues([['A1', 'B1'], ['A2', 'B2']]);</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('setValues()', 'easy')">Easy</button>
                             <button class="normal-button" onclick="showPracticeQuestion('setValues()', 'normal')">Normal</button>
@@ -407,8 +637,9 @@
                     </tr>
                     <tr>
                         <td>getLastRow()</td>
-                        <td>シートの最後の行を取得する</td>
-                        <td><code>function getLastRowExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  let lastRow = sheet.getLastRow();<br>}</code></td>
+                        <td>シート内の最後の行番号を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let lastRow = sheet.getLastRow();</code></td>
                         <td>
                             <button class="easy-button" onclick="showPracticeQuestion('getLastRow()', 'easy')">Easy</button>
                             <button class="normal-button" onclick="showPracticeQuestion('getLastRow()', 'normal')">Normal</button>
@@ -416,54 +647,491 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>appendRow()</td>
-                        <td>シートの末尾に新しい行を追加する</td>
-                        <td><code>function appendRowExample() {<br>  let sheet = SpreadsheetApp.getActiveSheet();<br>  sheet.appendRow(["New Entry"]);<br>}</code></td>
+                        <td>getLastColumn()</td>
+                        <td>シート内の最後の列番号を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let lastColumn = sheet.getLastColumn();</code></td>
                         <td>
-                            <button class="easy-button" onclick="showPracticeQuestion('appendRow()', 'easy')">Easy</button>
-                            <button class="normal-button" onclick="showPracticeQuestion('appendRow()', 'normal')">Normal</button>
-                            <button class="difficult-button" onclick="showPracticeQuestion('appendRow()', 'difficult')">Difficult</button>
+                            <button class="easy-button" onclick="showPracticeQuestion('getLastColumn()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getLastColumn()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getLastColumn()', 'difficult')">Difficult</button>
                         </td>
                     </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <div id="Gmail" class="subtabcontent">
-            <table id="gmailMethodTable">
-                <thead>
                     <tr>
-                        <th>メソッド</th>
-                        <th>説明</th>
-                        <th>スクリプト例</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>GmailApp.getInboxThreads()</td>
-                        <td>受信トレイのスレッドを取得する</td>
-                        <td><code>function getInboxThreadsExample() {<br>  let threads = GmailApp.getInboxThreads();<br>}</code></td>
+                        <td>getRow()</td>
+                        <td>指定された行番号の行を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let row = sheet.getRow(1);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getRow()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getRow()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getRow()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>GmailApp.search()</td>
-                        <td>指定した検索クエリに一致するスレッドを検索する</td>
-                        <td><code>function searchEmailsExample() {<br>  let threads = GmailApp.search("from:example@gmail.com");<br>}</code></td>
+                        <td>getColumn()</td>
+                        <td>指定された列番号の列を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let column = sheet.getColumn(1);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getColumn()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getColumn()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getColumn()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>GmailApp.sendEmail()</td>
-                        <td>メールを送信する</td>
-                        <td><code>function sendEmailExample() {<br>  GmailApp.sendEmail("recipient@example.com", "Subject", "Body");<br>}</code></td>
+                        <td>getCell()</td>
+                        <td>指定された行番号と列番号のセルを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let cell = sheet.getCell(1, 1);</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCell()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCell()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCell()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>GmailThread.getMessages()</td>
-                        <td>スレッド内のメッセージを取得する</td>
-                        <td><code>function getMessagesExample() {<br>  let threads = GmailApp.getInboxThreads();<br>  let messages = threads[0].getMessages();<br>}</code></td>
+                        <td>getDisplayValue()</td>
+                        <td>セルの表示値を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let displayValue = cell.getDisplayValue();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getDisplayValue()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getDisplayValue()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getDisplayValue()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td>GmailMessage.getSubject()</td>
-                        <td>メッセージの件名を取得する</td>
-                        <td><code>function getSubjectExample() {<br>  let threads = GmailApp.getInboxThreads();<br>  let messages = threads[0].getMessages();<br>  let subject = messages[0].getSubject();<br>}</code></td>
+                        <td>getFormula()</td>
+                        <td>セルの数式を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let formula = cell.getFormula();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFormula()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFormula()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFormula()', 'difficult')">Difficult</button>
+                        </td>
                     </tr>
+                    <tr>
+                        <td>getBackground()</td>
+                        <td>セルの背景色を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let background = cell.getBackground();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getBackground()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getBackground()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getBackground()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getFontColor()</td>
+                        <td>セルの文字色を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let fontColor = cell.getFontColor();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFontColor()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFontColor()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFontColor()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getFontSize()</td>
+                        <td>セルの文字サイズを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let fontSize = cell.getFontSize();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFontSize()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFontSize()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFontSize()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getFontWeight()</td>
+                        <td>セルの文字の太さを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let fontWeight = cell.getFontWeight();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFontWeight()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFontWeight()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFontWeight()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getFontStyle()</td>
+                        <td>セルの文字のスタイルを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let fontStyle = cell.getFontStyle();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFontStyle()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFontStyle()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFontStyle()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getFontFamily()</td>
+                        <td>セルの文字のフォントファミリーを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let fontFamily = cell.getFontFamily();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getFontFamily()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getFontFamily()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getFontFamily()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getHorizontalAlignment()</td>
+                        <td>セルの水平方向の配置を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let horizontalAlignment = cell.getHorizontalAlignment();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getHorizontalAlignment()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getHorizontalAlignment()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getHorizontalAlignment()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getVerticalAlignment()</td>
+                        <td>セルの垂直方向の配置を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let verticalAlignment = cell.getVerticalAlignment();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getVerticalAlignment()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getVerticalAlignment()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getVerticalAlignment()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getWrapStrategy()</td>
+                        <td>セルの改行方法を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let wrapStrategy = cell.getWrapStrategy();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getWrapStrategy()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getWrapStrategy()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getWrapStrategy()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getNumberFormat()</td>
+                        <td>セルの数値の書式を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let numberFormat = cell.getNumberFormat();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getNumberFormat()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getNumberFormat()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getNumberFormat()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getNote()</td>
+                        <td>セルのコメントを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let note = cell.getNote();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getNote()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getNote()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getNote()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getComment()</td>
+                        <td>セルのコメントを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let comment = cell.getComment();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getComment()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getComment()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getComment()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getComments()</td>
+                        <td>セルのコメントを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let comments = cell.getComments();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getComments()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getComments()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getComments()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentAuthor()</td>
+                        <td>セルのコメントの作成者を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentAuthor = cell.getCommentAuthor();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentAuthor()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentAuthor()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentAuthor()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentEmail()</td>
+                        <td>セルのコメントの作成者のメールアドレスを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentEmail = cell.getCommentEmail();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentEmail()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentEmail()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentEmail()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentTimestamp()</td>
+                        <td>セルのコメントの作成日時を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentTimestamp = cell.getCommentTimestamp();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentTimestamp()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentTimestamp()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentTimestamp()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplies()</td>
+                        <td>セルのコメントの返信を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplies = cell.getCommentReplies();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplies()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplies()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplies()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyAuthor()</td>
+                        <td>セルのコメントの返信の作成者を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyAuthor = cell.getCommentReplyAuthor();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyAuthor()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyAuthor()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyAuthor()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyEmail()</td>
+                        <td>セルのコメントの返信の作成者のメールアドレスを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyEmail = cell.getCommentReplyEmail();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyEmail()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyEmail()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyEmail()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyTimestamp()</td>
+                        <td>セルのコメントの返信の作成日時を取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyTimestamp = cell.getCommentReplyTimestamp();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyTimestamp()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyTimestamp()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyTimestamp()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
+                        <td>セルのコメントの返信のテキストを取得する</td>
+                        <td>非破壊的</td>
+                        <td><code>let commentReplyText = cell.getCommentReplyText();</code></td>
+                        <td>
+                            <button class="easy-button" onclick="showPracticeQuestion('getCommentReplyText()', 'easy')">Easy</button>
+                            <button class="normal-button" onclick="showPracticeQuestion('getCommentReplyText()', 'normal')">Normal</button>
+                            <button class="difficult-button" onclick="showPracticeQuestion('getCommentReplyText()', 'difficult')">Difficult</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>getCommentReplyText()</td>
                 </tbody>
             </table>
         </div>
@@ -582,23 +1250,6 @@
   console.log(fruits);
 }`,
                         explanation: 'push() メソッドを使用して、配列の末尾に "バナナ" を追加し、その後 pop() メソッドを使用して "バナナ" を削除しています。'
-                    },
-                    difficult: {
-                        question: 'ネストされた配列 nestedArray を受け取り、全ての要素をフラットにして、それぞれの要素を2倍にした配列を返してください。配列の深さは不定で、再帰的にフラットにする必要があります。<br>例: let nestedArray = [1, [2, [3, [4]], 5]];',
-                        answer: `function flattenAndDouble(arr) {
-  return arr.reduce((acc, val) => {
-    if (Array.isArray(val)) {
-      return acc.concat(flattenAndDouble(val));
-    } else {
-      return acc.concat(val * 2);
-    }
-  }, []);
-}
-
-// 使用例
-let nestedArray = [1, [2, [3, [4]], 5]];
-console.log(flattenAndDouble(nestedArray)); // [2, 4, 6, 8, 10]`,
-                        explanation: 'reduce() メソッドを使用して、ネストされた配列を再帰的にフラットにし、各要素を2倍にしています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素が配列であるかどうかをチェックし、配列であれば再帰的にフラットにし、そうでなければ要素を2倍にして結果の配列に追加します。'
                     }
                 },
                 'pop()': {
@@ -624,17 +1275,6 @@ console.log(flattenAndDouble(nestedArray)); // [2, 4, 6, 8, 10]`,
   console.log("残りの配列: " + numbers);
 }`,
                         explanation: 'pop() メソッドを使用して、配列の最後の要素を削除し、その後 shift() メソッドを使用して配列の最初の要素を削除しています。'
-                    },
-                    difficult: {
-                        question: '配列 numbers を受け取り、全ての要素を3倍にして、その合計を返してください。<br>例: let numbers = [1, 2, 3, 4, 5];',
-                        answer: `function tripleAndSum(arr) {
-  return arr.reduce((acc, val) => acc + val * 3, 0);
-}
-
-// 使用例
-let numbers = [1, 2, 3, 4, 5];
-console.log(tripleAndSum(numbers)); // 45`,
-                        explanation: 'reduce() メソッドを使用して、配列の全ての要素を3倍にし、その合計を計算しています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素を3倍にし、その合計を計算して結果を返します。'
                     }
                 },
                 'shift()': {
@@ -722,7 +1362,7 @@ console.log(addGrapesAndReverse(fruits)); // ["オレンジ", "バナナ", "り�
                         explanation: 'map() メソッドを使用して、配列の各要素を2倍にした新しい配列を作成しています。'
                     },
                     normal: {
-                        question: '配列 numbers の各要素を2倍にした新しい配列を作成し、その配列の合計を計算してください。<br>例: let numbers = [1, 2, 3, 4];',
+                        question: '配列 numbers の各要素を2倍にした新しい配列を作成し、その配の合計を計算してください。<br>例: let numbers = [1, 2, 3, 4];',
                         answer: `function doubleAndSumNumbers() {
   let numbers = [1, 2, 3, 4];
   let doubled = numbers.map(x => x * 2);
@@ -890,7 +1530,7 @@ console.log(checkAndFilterPositiveNumbers(numbers)); // [1, 3, 5]`,
 // 使用例
 let numbers = [1, 2, 3, 4, 5];
 console.log(squareAndSum(numbers)); // 55`,
-                        explanation: 'reduce() メソッドを使用して、配列の全ての要素を2乗にし、その合計を計算しています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素を2乗にし、その合計を計算して結果を返します。'
+                        explanation: 'reduce() メソッドを使用して、配列の全ての要素を2乗し、その合計を計算しています。reduce() メソッドは、配列の各要素に対して指定された関数を実行し、単一の結果を生成します。この場合、配列の各要素を2乗にし、その合計を計算して結果を返します。'
                     }
                 },
                 'flat()': {
@@ -1039,6 +1679,41 @@ doubleAndSortNumbers(numbers); // [16, 10, 6, 2]`,
   sheet.appendRow([timestamp, "新しいエントリ"]);
 }`,
                         explanation: 'appendRow() メソッドを使用し、現在の時刻（new Date()）と「新しいエントリ」というテキストを新しい行に追加しています。'
+                    }
+                },
+                'forEach()': {
+                    easy: {
+                        question: '配列 numbers の各要素をコンソールに出力してください。<br>例: let numbers = [1, 2, 3, 4];',
+                        answer: `function logNumbers() {
+  let numbers = [1, 2, 3, 4];
+  numbers.forEach(function(number) {
+    console.log(number);
+  });
+}`,
+                        explanation: 'forEach() メソッドを使用して、配列の各要素を順に処理し、コンソールに出力しています。'
+                    },
+                    normal: {
+                        question: '配列 numbers の各要素を2倍にして、新しい配列 doubledNumbers を作成してください。<br>例: let numbers = [1, 2, 3, 4];',
+                        answer: `function doubleNumbers() {
+  let numbers = [1, 2, 3, 4];
+  let doubledNumbers = [];
+  numbers.forEach(function(number) {
+    doubledNumbers.push(number * 2);
+  });
+  console.log(doubledNumbers);
+}`,
+                        explanation: 'forEach() メソッドを使用して、配列の各要素を2倍にし、新しい配列に追加しています。'
+                    },
+                    difficult: {
+                        question: '配列 objects の各オブジェクトにプロパティ "processed" を追加し、その値を true にしてください。<br>例: let objects = [{name: "A"}, {name: "B"}];',
+                        answer: `function processObjects() {
+  let objects = [{name: "A"}, {name: "B"}];
+  objects.forEach(function(obj) {
+    obj.processed = true;
+  });
+  console.log(objects);
+}`,
+                        explanation: 'forEach() メソッドを使用して、各オブジェクトに新しいプロパティ "processed" を追加し、その値を true に設定しています。'
                     }
                 }
             };
