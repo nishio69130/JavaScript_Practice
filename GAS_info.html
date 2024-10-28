@@ -3,473 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Apps Script (GAS)の概要</title>
+    <title>GASの基礎</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 20px;
-            background-color: #232f3e;
-            color: #ffffff;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        h1, h2, h3 {
-            color: #ff9900;
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
         }
-        pre {
-            background-color: #3a4553;
-            padding: 10px;
-            border: 1px solid #ddd;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, "Courier New", monospace;
-            background-color: #3a4553;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        .toc {
-            background-color: #232f3e;
-            color: #ffffff;
-            padding: 10px;
-            border: 1px solid #ddd;
+
+        .tab {
+            display: flex;
+            justify-content: center;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            max-width: 800px; /* 他の要素とバランスを合わせる */
+            margin: 0 auto;
+        }
+
+        .tab button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            margin: 0 5px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .tab button:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            background-color: #fff;
+            margin-bottom: 40px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .practice {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .hint, .answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-left: 3px solid #007bff;
+        }
+
+        .toggle-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .toggle-btn:hover {
+            background-color: #0056b3;
+        }
+
+        #toc {
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 200px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 250px;
         }
-        .toc:hover {
-            opacity: 1;
+
+        #toc ul {
+            list-style-type: none;
+            padding-left: 0;
         }
-        .toc a {
+
+        #toc li {
+            margin: 8px 0;
+        }
+
+        #toc a {
+            color: #007bff;
             text-decoration: none;
-            color: #ff9900;
         }
-        .toc a:hover {
+
+        #toc a:hover {
+            color: #0056b3;
             text-decoration: underline;
         }
-        .toc h2 {
-            cursor: pointer;
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
         }
-        .toc ul {
-            display: none;
-        }
-        .toc.show ul {
-            display: block;
-        }
-        .practice {
-            background-color: #3a4553;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
-        .answer {
-            display: none;
-            background-color: #3a4553;
-            padding: 10px;
-            border: 1px solid #ddd;
-            margin-top: 10px;
-        }
-        .show-answer {
-            cursor: pointer;
-            color: #ff9900;
-        }
-        .box {
-            border: 2px solid #ff9900;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
+
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.toc h2').addEventListener('click', function() {
-                document.querySelector('.toc').classList.toggle('show');
-            });
-
-            document.querySelectorAll('.show-answer').forEach(function(button) {
-                button.addEventListener('click', function() {
-                    this.nextElementSibling.classList.toggle('show');
-                });
-            });
-        });
-    </script>
 </head>
 <body>
-    <div class="toc">
-        <h2>目次</h2>
+    <div id="toc">
+        <h3>目次</h3>
         <ul>
-            <li><a href="#section1">1. Google Apps Script (GAS)の概要</a></li>
-            <li><a href="#section2">2. マクロを記録</a></li>
-            <li><a href="#section3">3. スクリプトエディタ</a></li>
-            <li><a href="#section4">4. スクリプトの基礎</a></li>
-            <li><a href="#section5">5. 文字データの制御</a></li>
-            <li><a href="#section6">6. スクリプトの起動方法</a></li>
+            <li><a href="#section1">1. 変数・定数</a></li>
+            <li><a href="#section2">2. 順次処理</a></li>
+            <li><a href="#section3">3. 分岐処理</a></li>
+            <li><a href="#section4">4. 繰り返し処理</a></li>
+            <li><a href="#section5">5. 関数</a></li>
+            <li><a href="#section6">6. オブジェクト</a></li>
+            <li><a href="#section7">7. スプレッドシート制御</a></li>
         </ul>
     </div>
 
-    <h1 id="section1">1. Google Apps Script (GAS)の概要</h1>
-    <div class="box">
-        <p>Google Apps Script (GAS)は、Googleが提供するスクリプト言語で、Googleアプリケーションを自動化するためのものです。</p>
-        <ul>
-            <li>無償で利用可能</li>
-            <li>専用の環境構築が不要</li>
-            <li>Googleのサービスとの連携が容易</li>
-        </ul>
-    </div>
+    <div class="container">
+        <p>以下のリンクをクリックするとTOPページに戻ります。</p>
+        <a href="index.html">TOPページに戻る</a>
+        <div id="section1" class="section">
+            <h2>1. 変数・定数</h2>
+            <p>変数と定数はデータを保存するための箱のようなものです。JavaScriptでは、<code>let</code>と<code>const</code>を使って変数や定数を宣言します。変数はプログラムの実行中に値を変更することができますが、定数は一度設定した値を変更することはできません。</p>
+            <ul>
+                <li><code>let</code>: 再代入可能な変数。例: <code>let num = 3;</code>。この変数は後から値を変更できます。例えば、<code>num = 5;</code>とすることで、変数<code>num</code>の値を3から5に変更することができます。</li>
+                <li><code>const</code>: 再代入不可能な定数。例: <code>const pi = 3.14;</code>。この定数は一度値を設定すると変更できません。例えば、円の計算に使う円周率など、変更する必要のない値を定数として宣言します。</li>
+                <li><code>=</code>: 代入演算子。右側の値を左側の変数に格納します。例: <code>let greeting = "こんにちは";</code>。この場合、文字列"こんにちは"が変数<code>greeting</code>に格納されます。</li>
+            </ul>
+            <p>変数や定数を使うことで、プログラム内でデータを管理しやすくなります。例えば、ユーザーの入力を保存したり、計算結果を保持したりするのに役立ちます。変数や定数を適切に使うことで、プログラムの可読性や保守性が向上します。</p>
 
-    <h2 id="section2">2. マクロを記録</h2>
-    <div class="box">
-        <p>GASの基本機能として「マクロの記録」があります。手動で行った操作をマクロとして記録し、再実行できます。</p>
-        <h3>マクロの記録の手順</h3>
-        <ol>
-            <li>「拡張機能→マクロ→マクロを記録」を選択します。</li>
-            <li>記録したい操作を実行し、「保存」を選択します。</li>
-            <li>記録した操作を再実行できます。</li>
-        </ol>
-        <pre><code>function myFunction1() {
-  var spreadsheet = SpreadsheetApp.getActive();
-  spreadsheet.getRange('C1').activate();
-  spreadsheet.getRange('A1:A3').copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_NORMAL, false);
-};</code></pre>
-    </div>
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>変数と定数を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>変数<code>num</code>を宣言し、値を10に設定してください。</li>
+                    <li>定数<code>greeting</code>を宣言し、値を"こんにちは"に設定してください。</li>
+                    <li>変数<code>num</code>の値を20に変更し、コンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint1-1')">ヒントを表示</button>
+                <div id="hint1-1" class="hint">
+                    <p>変数の宣言：<br>
+                    <code>let 変数名 = 値;</code></p>
+                    <p>定数の宣言：<br>
+                    <code>const 定数名 = 値;</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer1-1')">解答を表示</button>
+                <div id="answer1-1" class="answer">
+                    <pre><code>
+let num = 10;
+const greeting = "こんにちは";
+num = 20;
+console.log(num);  // 20を出力
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-    <h2 id="section3">3. スクリプトエディタ</h2>
-    <div class="box">
-        <p>「マクロを記録」で作成したスクリプトは、スクリプトエディタを開くことで確認や編集が可能です。</p>
-        <h3>スクリプトエディタの開き方</h3>
-        <ol>
-            <li>「拡張機能→Apps Script」を選択します。</li>
-            <li>「マクロ.gs」をクリックすると表示されます。</li>
-        </ol>
-    </div>
+        <div id="section2" class="section">
+            <h2>2. 順次処理</h2>
+            <p>プログラムは上から下へ順番に実行されます。これを順次処理と呼びます。順次処理では、コードが書かれた順番に従って実行されるため、プログラムの流れを理解しやすくなります。<code>console.log()</code>を使って、データをコンソールに出力できます。これはデバッグやプログラムの動作確認に非常に便利です。</p>
+            <pre><code>
+let greeting = "こんにちは";
+console.log(greeting);  // "こんにちは"を出力
+            </code></pre>
+            <p>このように、<code>console.log()</code>を使うこで、変数の値や計算結果を確認することができます。例えば、複雑な計算を行う前に、変数の値を確認しておくことで、プログラムの誤りを早期に発見することができます。</p>
+            <p>また、順次処理を理解することで、プログラムの流れを予測しやすくなり、バグの原因を特定しやすくなります。順次処理はプログラムの基本的な実行順序であり、他の制御構造（分岐処理や繰り返し処理）と組み合わせて使うことで、より複雑な処理を実現することができます。</p>
 
-    <h2 id="section4">4. スクリプトの基礎</h2>
-    <div class="box">
-        <h3>4.1. 関数</h3>
-        <p>「function」から始まり、{}で囲まれた部分を「関数」と定義します。</p>
-        <pre><code>function 関数名() {
-  処理
-};</code></pre>
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>順次処理を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>変数<code>name</code>を宣言し、値を"太郎"に設定してください。</li>
+                    <li>変数<code>age</code>を宣言し、値を25に設定してください。</li>
+                    <li>変数<code>name</code>と<code>age</code>の値をコンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint2-1')">ヒントを表示</button>
+                <div id="hint2-1" class="hint">
+                    <p>変数の宣言：<br>
+                    <code>let 変数名 = 値;</code></p>
+                    <p>コンソール出力：<br>
+                    <code>console.log(変数名);</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer2-1')">解答を表示</button>
+                <div id="answer2-1" class="answer">
+                    <pre><code>
+let name = "太郎";
+let age = 25;
+console.log(name);  // "太郎"を出力
+console.log(age);   // 25を出力
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-        <h3>4.2. コメント</h3>
-        <p>「//」の後に記述する部分はスクリプトとして認識されません。</p>
-
-        <h3>4.3. 四則演算</h3>
-        <p>GASでの四則演算の使用方法を解説します。</p>
-        <pre><code>function 四則演算() {
-  console.log(2+3);  //足し算
-  console.log(3-2);  //引き算
-  console.log(4*2);  //かけ算
-  console.log(6/3);  //割り算
-}</code></pre>
-
-        <h3>4.4. 変数と定数について</h3>
-        <h4>4.4.1. 変数宣言と値代入</h4>
-        <p>変数とは、値を保存するための「箱」のようなものです。</p>
-        <pre><code>function 変数での四則演算() {
-  let A=2;
-  let B=3;
-  let C=4;
-  let D=6;
-
-  console.log(A+B);　//加算
-  console.log(B-A);　//減算
-  console.log(C*A);　//乗算
-  console.log(D/B);　//除算
-}</code></pre>
-
-        <h4>4.4.2. 宣言文（var, let, const）</h4>
-        <p>変数や定数を使用する際には、それぞれ適切な宣言文が必要です。</p>
-        <ul>
-            <li>変数宣言: var A;　let A;</li>
-            <li>定数宣言: const A=●●;</li>
-        </ul>
-        <table>
-            <tr>
-                <th>再宣言</th>
-                <th>再代入</th>
-            </tr>
-            <tr>
-                <td>var（変数）</td>
-                <td>可能</td>
-                <td>可能</td>
-            </tr>
-            <tr>
-                <td>let（変数）</td>
-                <td>不可能</td>
-                <td>可能</td>
-            </tr>
-            <tr>
-                <td>const（定数）</td>
-                <td>不可能</td>
-                <td>不可能</td>
-            </tr>
-        </table>
-        <p>次に、それぞれの挙動について詳細に見ていきます。</p>
-
-        <h4>①var</h4>
-        <p>varの特性として、再宣言も再代入も可能です。</p>
-        <p>再宣言・再代入について、以下のスクリプトを参照に説明します。</p>
-        <pre><code>function 変数宣言() {
-  var A;　//変数宣言
-  A=2;　//値代入
-  console.log(A);　//値表示: 2
-
-  var A;　//変数の再宣言
-  A=3;　//値の再代入
-  console.log(A);　//値表示: 3
-}</code></pre>
-        <p>このスクリプトでは、最初に変数Aを宣言し、値2を代入しています。その値が正しく表示されます。そして再度、変数Aを宣言し、値3を代入。その結果も問題なく表示されます。このように、varでは変数の再宣言と値の再代入が可能です。</p>
-
-        <h4>②let</h4>
-        <p>letの場合、再代入は可能ですが再宣言は不可能です。</p>
-        <p>以下のスクリプトでは、変数Aの再宣言によりエラーが発生します。</p>
-        <pre><code>function 変数宣言() {
-  let A;　//変数宣言
-  A=2;　//値代入
-  console.log(A);　//値表示: 2
-
-  let A;　//エラー：変数の再宣言
-  A=3;　//値の再代入
-  console.log(A);　//値表示: 3
-}</code></pre>
-        <p>代わりに以下のスクリプトではエラーは発生せず、値の再代入も問題なく行われます。</p>
-        <pre><code>function 変数宣言() {
-  let A;　//変数宣言
-  A=2;　//値代入
-  console.log(A);　//値表示: 2
-
-  A=3;　//値の再代入
-  console.log(A);　//値表示: 3
-}</code></pre>
-
-        <h4>③const</h4>
-        <p>varとletは，値の再代入が可能だった。それに対しconstは一度値を代入したら変更できない「定数」である。値を代入せずに宣言だけを行うことも不可能で，宣言時に値の代入も必要となる。</p>
-        <p>constでは，再宣言も再代入もできない。</p>
-        <p>以下のスクリプトでは，定数Aの再宣言によりエラーが発生する。</p>
-        <pre><code>function 定数宣言() {
-  const A=2;　//定数宣言
-  console.log(A);　//値表示: 2
-
-  const A=3;　//エラー：定数の再宣言
-  console.log(A);　//値表示: 3
-}</code></pre>
-        <p>さらに，以下のスクリプトでは定数の再代入が試みられ，エラーが発生する。</p>
-        <pre><code>function 定数宣言() {
-  const A=2;　//定数宣言
-  console.log(A);　//値表示: 2
-
-  A=3;　//エラー：定数の再代入
-  console.log(A);　//値表示: 3
-}</code></pre>
-        <p>このスクリプトでは，定数Aの値が正しく表示されるまで問題ないが，定数Aに対して再代入が試みられた時点でエラーが発生する。</p>
-
-        <h4>④var，let，constの使い分け（JFRLでGASを用いる場合）</h4>
-        <p>varは再宣言も再代入も可能な宣言文である。特にこだわりがない場合には「var」を使っても良い。例えば「マクロを記録」機能でスクリプトを生成すると変数宣言には「var」が用いられているが，このvarを全部letやconstへ書き換える必要はない。</p>
-        <p>しかし，自分でスクリプトを新たに書く場合，varの使用は避けたほうが良い。「varは再宣言も再代入も可能」と述べたが，これは「エラーが起こりにくいので，使いやすい」という意味ではない。逆に，varを使用すると，同じ変数名を複数用意した場合でもスクリプトエディタではエラーが発生せず，間違いに気づきにくい。</p>
-        <p>以下に例を示す。</p>
-        <pre><code>// 正しいスクリプト
-function 変数宣言() {
-var 受付者;
-// (長い処理)
-受付者="○○";
-
-var 受付件数="●●";　//正しい設定
-// (長い処理)
-
-var 検索結果=受付者+受付件数;
-console.log(検索結果);
+        <div id="section3" class="section">
+            <h2>3. 分岐処理</h2>
+            <p>条件に応じて異なる処理を行います。分岐処理を使うことで、プログラムの実行フローを制御することができます。<code>if</code>文を使って条件を設定し、条件が真の場合に特定の処理を実行します。例えば、ユーザーの入力に応じて異なるメッセージを表示する場合などに使います。</p>
+            <ul>
+                <li><code>===</code>: 等価演算子。例: <code>if (num === 3)</code>。左右の値が同じかどうかを比較します。例えば、<code>num</code>が3であれば条件は真となり、<code>if</code>文の中の処理が実行されます。</li>
+                <li><code>!==</code>: 不等価演算子。例: <code>if (num !== 3)</code>。左右の値が異なるかどうかを比較します。例えば、<code>num</code>が3でなければ条件は真となり、<code>if</code>文の中の処理が実行されます。</li>
+                <li><code>&gt;</code>, <code>&lt;</code>: 大小比較演算子。例: <code>if (num &gt; 0)</code>。数値の大小を比較します。例えば、<code>num</code>が0より大きければ条件は真となり、<code>if</code>文の中の処理が実行されます。</li>
+            </ul>
+            <pre><code>
+let num = 5;
+if (num > 3) {
+    console.log("3より大きい");
+} else {
+    console.log("3以下");
 }
-// 間違ったスクリプト
-function 変数宣言() {
-var 受付者;
-// (長い処理)
-受付者="○○";
+            </code></pre>
+            <p>このように、条件に応じて異なるメッセージを出力することができます。分岐処理を使うことで、プログラムの柔軟性が向上し、さまざまな状況に対応することができます。</p>
+            <p>また、<code>else if</code>を使うことで、複数の条件を設定することができます。例えば、数値が正の数か負の数か、またはゼロかを判定する場合などに使います。</p>
 
-var 受付者="●●";　//誤った設定
-// (長い処理)
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>分岐処理を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>変数<code>score</code>を宣言し、値を85に設定してください。</li>
+                    <li>変数<code>score</code>の値が90以上の場合は"優秀"、70以上90未満の場合は"良好"、それ以外の場合は"努力が必要"とコンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint3-1')">ヒントを表示</button>
+                <div id="hint3-1" class="hint">
+                    <p>条件分岐の書き方：<br>
+                    <code>if (条件) {<br>
+                        処理<br>
+                    } else if (条件) {<br>
+                        処理<br>
+                    } else {<br>
+                        処理<br>
+                    }</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer3-1')">解答を表示</button>
+                <div id="answer3-1" class="answer">
+                    <pre><code>
+let score = 85;
+if (score >= 90) {
+    console.log("優秀");
+} else if (score >= 70) {
+    console.log("良好");
+} else {
+    console.log("努力が必要");
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-var 検索結果=受付者+受付件数;
-console.log(検索結果);
-}</code></pre>
-        <p>このように，間違ったスクリプトでは，本来変数「受付件数」とすべきところを誤って変数「受付者」としてしまったが，varを使用しているためエディタ上ではエラーが出ず，ミスに気づかない。</p>
-        <p>一方，letを用いると，同名の変数を2つ以上用意した場合にはスクリプトエディタ上でエラーが発生する。このため，スクリプトを自分で書く際はletを用いるのが無難である。</p>
-        <p>また，一度代入した値を変更しない場合には，constを用いることが推奨される。しかし，letを使い続けても問題はない。後から「この値はletで宣言していたが，実は定数だった」と気づいたとしても，わざわざconstに書き換える必要はない。</p>
-        <p>まとめると以下のようになる：</p>
-        <ul>
-            <li>自分でスクリプトを書く際は「let」を用いる。ミスに気づきやすくするため，「var」は極力避ける。</li>
-            <li>値を変更しない場合には「const」を用いる。ただし，これはあくまで指針であり，必ずしも守る必要はない。</li>
-            <li>ただし，「マクロを記録」機能等で「var」が用いられていた場合は，わざわざ「let」や「const」に書き換える必要はない（ただし，書き換えても問題はない）。</li>
-        </ul>
-        <p>これらの点は，JFRLでGASを用いる場合の現時点での筆者（西谷）の見解である。現在のJFRLではGASの利用がまだ広まっておらず，大規模なプログラミングを行うことは少ない。そのため，変数や定数の宣言に厳格に使い分ける必要は必ずしもない。ただし，可能ならば，原則通りに使い分けるべきである。</p>
-    </div>
+        <div id="section4" class="section">
+            <h2>4. 繰り返し処理</h2>
+            <p>同じ処理を複数回実行する場合に使用します。繰り返し処理を使うことで、同じコードを何度も書く必がなくなり、プログラムが簡潔になります。主に<code>for</code>文と<code>while</code>文があります。</p>
+            <pre><code>
+// for文の基本形
+for (let i = 0; i < 5; i++) {
+    console.log(i);  // 0から4まで出力
+}
 
-    <h2 id="section5">5. 文字データの制御</h2>
-    <div class="box">
-        <p>データには「数値データ」と「文字データ」とがある。本章では文字データにフォーカスする。</p>
-        <p>変数に代入する際，以下のようにする。</p>
-        <p>数値データ</p>
-        <pre><code>let 数値=1;</code></pre>
-        <p>（ダブル・シングルクォーテーションは不要）</p>
-        <p>文字データ</p>
-        <pre><code>let 文字="あいうえお"; 　または 　let 文字='あいうえお';</code></pre>
-        <p>数値データは通常の計算が可能（例：1+3=4）。文字データの加算は結合になり，例：「あいうえお」+「かきくけこ」=「あいうえおかきくけこ」となる。</p>
-        <p>※補足</p>
-        <p>数字をダブルクォーテーション等で囲むと文字データとして扱われる。</p>
-        <pre><code>function 変数での四則演算() {
-  let A="2";
-  let B="4";
+// while文の基本形
+let count = 0;
+while (count < 3) {
+    console.log(count);
+    count++;
+}
+            </code></pre>
+            <p><code>for</code>文は、指定した回数だけ繰り返し処理��行います。例えば、<code>for (let i = 0; i < 5; i++)</code>とすることで、<code>i</code>が0から4までの間、繰り返し処理が実行されます。</p>
+            <p><code>while</code>文は、条件が真である限り繰り返し処理を行います。例えば、<code>while (count < 3)</code>とすることで、<code>count</code>が3未満である間、繰り返し処理が実行されます。</p>
+            <p>繰り返し処理を使うことで、同じ処理を効率的に行うことができます。例えば、配列の要素を順番に処理する場合や、特定の条件が満たされるまで処理を繰り返す場合などに使います。</p>
 
-  console.log(A+B);　//結果: '24' 
-}</code></pre>
-        <p>足し算では「6」(2+4=6)ではなく，「24」（2と4を結合し24）と文字データとして扱われている。なお足し算以外の 他の計算は数値として行われる。</p>
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>繰り返し処理を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>1から10までの数字を順番に出力してください。</li>
+                    <li>変数<code>sum</code>を宣言し、1から10までの数字の合計を計算してコンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint4-1')">ヒントを表示</button>
+                <div id="hint4-1" class="hint">
+                    <p>for文の書き方：<br>
+                    <code>for (let i = 開始値; i <= 終了値; i++) {<br>
+                        処理<br>
+                    }</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer4-1')">解答を表示</button>
+                <div id="answer4-1" class="answer">
+                    <pre><code>
+for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}
 
-        <h3>5.1. 文字データの結合</h3>
-        <p>文字データを結合する基本は「+」を用いる。</p>
-        <pre><code>function 文字を扱う(){
- console.log("文字①"+"文字②");
-}</code></pre>
-        <pre><code>function 文字を扱う(){
- let A=”あいうえお”+”かきくけこ”;
- console.log(A);
-}</code></pre>
-        <pre><code>function 文字を扱う(){
- let A="文字①"+"文字②";
- let B="文字③"+"文字④";
- let C=A+B;　//☆1
- console.log(C);　//☆2
- console.log("C") //☆3
-}</code></pre>
-        <p>①のように直接結合しても良いし，②のように結合結果を変数に代入して用いても良い。</p>
-        <p>③のスクリプトの実行結果は「文字①文字②文字③文字④」となる。</p>
-        <p>③の☆1のように変数同士を結合することもできる。</p>
-        <p>変数はダブルクォーテーションで囲ってはいけない。囲むと文字データとして認識される。例えば☆3のconsole.log("C")は結果「C」となる。</p>
-        <p>文字データと変数を組み合わせることも可能。</p>
-        <pre><code>let 受付者="西谷望";
-let 受付件数=10;
-console.log(受付者+"さんの受付件数は"+受付件数+"件でした。");</code></pre>
-        <p>このログの結果は以下のように分解できる。</p>
-        <pre><code>console.log(受付者　+　"さんの受付件数は"　+　受付件数　+　"件でした。")
-　　　　　　変数　　　　　文字データ　　　　　　　　変数　　　　　文字データ</code></pre>
-        <p>変数はダブルクォーテーションでは囲まず，変数以外の部分はダブルクォーテーションで囲むことで，それぞれ区別して扱っている。</p>
-        <p>※補足</p>
-        <p>変数名に関して，英単語の使用が推奨される場面もある。たとえば，上記の例は以下のように英語の変数名した方が可読性が向上するかもしれない。</p>
-        <pre><code>let member="西谷望";
-let num=10;
-console.log(member+"さんの受付件数は"+num+"件でした。");</code></pre>
-        <p>現時点では日本語の変数名を認める方針で本文書は作成しているが，将来的に変数命名のルール化を検討したほうが良いかもしれない。</p>
+let sum = 0;
+for (let i = 1; i <= 10; i++) {
+    sum += i;
+}
+console.log(sum);  // 55を出力
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-        <h3>5.2. 文字データの改行</h3>
-        <p>文字データで改行する場合，「\n」を使用する。</p>
-        <pre><code>function 文字を扱う() {
-  let 受付者="西谷望";
-  let 受付件数=10;
-  console.log(受付者+"さんの受付件数は\n"+受付件数+"件でした。");
-}</code></pre>
-        <p>「\n」を増やせば，その分改行が増える。</p>
-        <pre><code>function 文字を扱う() {
-  let 受付者="西谷望";
-  let 受付件数=10;
-  console.log(受付者+"さんの受付件数は\n\n\n"+受付件数+"件\nでした。");
-}</code></pre>
+        <div id="section5" class="section">
+            <h2>5. 関数</h2>
+            <p>関数は、特定の処理をまとめて名前を付けたものです。関数を使うことで、コードの再利用性が高まり、プログラムが整理されます。関数は、必要なときに呼び出して実行することができます。</p>
+            <pre><code>
+function greet(name) {
+    console.log("こんにちは、" + name + "さん");
+}
 
-        <h3>5.3. 文字データ変数へのデータ追加</h3>
-        <p>文字データ変数には「変数+=追加データ」という風に「+=」を用いることで後からデータを追加できる。</p>
-    <h3>5.3. 文字データ変数へのデータ追加</h3>
-    <p>文字データ変数には「変数+=追加データ」という風に「+=」を用いることで後からデータを追加できる。</p>
-    <pre><code>function 文字データ変数へのデータ追加() {
-  let 受付者="西谷望";
-  let 結果=受付者;
-  結果+="さんの受付件数は\n";
-  let 受付件数=10;
-  結果+=受付件数+"件でした。";
-  console.log(結果);
-}</code></pre>
+greet("太郎");  // "こんにちは、太郎さん"を出力
+            </code></pre>
+            <p>このように、関数を定義して呼び出すことで、同じ処理を何度も実行することができます。関数は、引数を受け取ることができ、引数に基づいて異なる処理を行うことができます。</p>
+            <p>例えば、<code>greet</code>関数は、引数<code>name</code>を受け取り、"こんにちは、" + <code>name</code> + "さん"というメッセージをコンソールに出力します。関数を使うことで、コードの重複を避け、プログラムの可読性や保守性を向上させることができます。</p>
+            <p>また、関数は戻り値を持つことができます。例えば、計算結果を返す関数や、特定の条件に基づいて値を返す関数などがあります。</p>
 
-    <h3>5.4. テンプレート文字列</h3>
-    <p>文字列は通常ダブルクォーテーションやシングルクォーテーションで囲むが，「バッククォート（`）」を用いる方法もあり，これを「テンプレート文字列」と呼ぶ。</p>
-    <pre><code>function テンプレート文字列を扱う() {
-  let 受付者="西谷望";
-  let 受付件数=10;
-  console.log(`${受付者}さんの受付件数は\n${受付件数}件でした。`);
-}</code></pre>
-    <p>テンプレート文字列では，変数を「${変数}」と記述し，実際の改行を表現するには直接改行するだけで良い。以下はその例：</p>
-    <pre><code>function テンプレート文字列で改行を扱う() {
-  let 受付者="西谷望";
-  let 受付件数=10;
-  console.log(`${受付者}さんの受付件数は
-${受付件数}件でした。`);
-}</code></pre>
-    <p>テンプレート文字列では，変数は「${変数}」の形で埋め込むことができ，「+」や「\n」のような従来の方法は不要である。特に多数の変数や改行を扱う際，テンプレート文字列を用いることでコードが見やすく整理されることがある。</p>
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>関数を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>引数として2つの数値を受け取り、その合計を返す関数<code>add</code>を定義してください。</li>
+                    <li>関数<code>add</code>を呼び出し、結果をコンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint5-1')">ヒントを表示</button>
+                <div id="hint5-1" class="hint">
+                    <p>関数の定義：<br>
+                    <code>function 関数名(引数1, 引数2) {<br>
+                        処理<br>
+                        return 戻り値;<br>
+                    }</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer5-1')">解答を表示</button>
+                <div id="answer5-1" class="answer">
+                    <pre><code>
+function add(a, b) {
+    return a + b;
+}
 
-    <h2 id="section6">6. スクリプトの起動方法</h2>
-    <p>作成したスクリプトの起動方法を説明する。</p>
-    <p>起動方法は複数ある。</p>
-    <p>①はプログラミング時のテスト動作時によく用いる。</p>
-    <p>②は余り使用していない。</p>
-    <p>③はRPA（Power Automate）と併用する際に使用する。</p>
-    <p>④が現状TMRS1で一番よく使用している。</p>
+let result = add(5, 3);
+console.log(result);  // 8を出力
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-    <h3>①スクリプトエディタで起動する</h3>
-    <p>以下のようにスクリプトエディタで関数をプルダウンで選択できる（赤枠）。実行したい関数を選択し，実行ボタン（青枠）を選択する。</p>
+        <div id="section6" class="section">
+            <h2>6. オブジェクト</h2>
+            <p>オブジェクトは、関連するデータや機能をまとめたものです。オブジェクトはプロパティとメソッドを持ちます。プロパティはオブジェクトの属性を表し、メソッドはオブジェクトの動作を表します。</p>
+            <pre><code>
+let person = {
+    name: "太郎",
+    age: 25,
+    greet: function() {
+        console.log("こんにちは、" + this.name + "です");
+    }
+};
 
-    <h3>②メニューバーの拡張機能より起動する（スプレッドシートの場合）</h3>
-    <ol>
-        <li>メニューバーから「拡張機能→マクロ→マクロをインポート」を選択。</li>
-        <li>作成したスクリプトについて「関数を追加」を選択。</li>
-        <li>追加すると追加済みの旨が表示される。</li>
-        <li>関数を追加した後，メニューバーから「拡張機能→マクロ」を選択すると，追加したスクリプトが表示される。これを選択することでスクリプトが起動する。</li>
-    </ol>
+console.log(person.name);  // "太郎"を出力
+person.greet();  // "こんにちは、太郎です"を出力
+            </code></pre>
+            <p>このように、オブジェクトを使うことで、データとその操作を一つにまとめることができます。例えば、<code>person</code>オブジェクトは、<code>name</code>と<code>age</code>というプロパティを持ち、<code>greet</code>というメソッドを持ちます。</p>
+            <p>オブジェクトのプロパティには、ドット記法を使ってアクセスすることができます。例えば、<code>person.name</code>とすることで、<code>person</code>オブジェクトの<code>name</code>プロパティにアクセスできます。</p>
+            <p>また、オブジェクトのメソッドは、オブジェクトのプロパティにアクセスして操作を行うことができます。例えば、<code>greet</code>メソッドは、<code>this.name</code>を使って<code>person</code>オブジェクトの<code>name</code>プロパティにアクセスし、メッセージを出力します。</p>
 
-    <h3>③ショートカットキーで起動する（スプレッドシートの場合）</h3>
-    <ol>
-        <li>上述の②の手順で作成したスクリプトについて「関数を追加」する。</li>
-        <li>メニューバーから「拡張機能→マクロ→マクロを管理」を選択。</li>
-        <li>該当スクリプトについて「0～9」の数字を入力する。</li>
-        <li>その後は「Ctrl＋Alt＋Shift＋設定した数字」を同時押しすることでそのスクリプトを起動できる。Power AutomateでGASを用いる際，この方法を多用する。</li>
-    </ol>
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>オブジェクトを使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>プロパティ<code>title</code>と<code>author</code>を持つ<code>book</code>オブジェクトを作成してください。</li>
+                    <li><code>book</code>オブジェクトに、<code>getSummary</code>メソッドを追加し、<code>title</code>と<code>author</code>を含む文字列を返すようにしてください。</li>
+                    <li><code>getSummary</code>メソッドを呼び出し、結果をコンソールに出力してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint6-1')">ヒントを表示</button>
+                <div id="hint6-1" class="hint">
+                    <p>オブジェクトの作成：<br>
+                    <code>let オブジェクト名 = {<br>
+                        プロパティ名: 値,<br>
+                        メソッド名: function() {<br>
+                            処理<br>
+                        }<br>
+                    };</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer6-1')">解答を表示</button>
+                <div id="answer6-1" class="answer">
+                    <pre><code>
+let book = {
+    title: "JavaScript入門",
+    author: "山田太郎",
+    getSummary: function() {
+        return this.title + " by " + this.author;
+    }
+};
 
-    <h3>④スクリプトボタンを作成し起動する（スプレッドシート）</h3>
-    <ol>
-        <li>メニューバーから「挿入→図形描写」を選択。</li>
-        <li>図形描写画面のメニューバーからテキスト ボックスをクリック。</li>
-        <li>テキストボックスをクリックした状態で以下のようにドラッグし四角形を作る。</li>
-        <li>テキストボックスで文字が入力できるので，自分が入力したい文言を入力する。</li>
-        <li>赤矢印箇所で輪郭の色を選べるので，黒色にする。これで枠ができる。</li>
-        <li>赤矢印箇所で塗りつぶしの色が選べる。ここでは黄色にする。色が付き，ボタンのような見た目になる。</li>
-        <li>右上の「保存して終了」を選択する。これでスプレッドシート内にボタンが配置される。左クリックでボタンを選択できるようになる。ドラッグすることでボタンは移動できる。</li>
-        <li>ボタンをクリックすると右側に3つ点が出てくる。この3つ点をクリックし，「スクリプトを割り当て」を選択。ここに設定したいスクリプト名を入力する。これで，このスクリプトボタンをクリックすることでスクリプトが起動するようになる。</li>
-    </ol>
+console.log(book.getSummary());  // "JavaScript入門 by 山田太郎"を出力
+                    </code></pre>
+                </div>
+            </div>
+        </div>
 
-    <div class="practice">
-        <h3>練習問題</h3>
-        <p>以下のスクリプトを修正し、エラーを解消してください。</p>
-        <pre><code>function 練習問題() {
-  let A=5;
-  let A=10; // エラー：変数の再宣言
-  console.log(A);
-}</code></pre>
-        <button class="show-answer">答えを見る</button>
-        <div class="answer">
-            <pre><code>function 練習問題() {
-  let A=5;
-  A=10; // 修正：再宣言を削除
-  console.log(A);
-}</code></pre>
+        <div id="section7" class="section">
+            <h2>7. スプレッドシート制御</h2>
+            <p>Google Apps Scriptを使って、Googleスプレッドシートを操作することができます。スプレッドシートのデータを読み書きすることで、さまざまな自動化タスクを実現できます。</p>
+            <pre><code>
+// スプレッドシートを開く
+let sheet = SpreadsheetApp.openById('スプレッドシートID').getSheetByName('シート名');
+
+// セルの値を取得
+let value = sheet.getRange('A1').getValue();
+console.log(value);  // セルA1の値を出力
+
+// セルの値を設定
+sheet.getRange('A1').setValue('新しい値');
+            </code></pre>
+            <p>このように、Google Apps Scriptを使うことで、スプレッドシートのセルの値を取得したり設定したりすることができます。例えば、特定のセルの値を読み取って処理を行ったり、計算結果をスプレッドシートに書き込んだりすることができます。</p>
+            <p>また、スプレッドシートの範囲を指定して、複数のセルの値を一度に操作することもできます。例えば、<code>getRange('A1:B2')</code>とすることで、A1からB2までの範囲を指定できます。</p>
+            <p>スプレッドシート制御を使うことで、データの管理や分析を効率的に行うことができます。例えば、定期的なレポート作成やデータの集計など、手作業では時間がかかる作業を自動化することができます。</p>
+
+            <div class="practice">
+                <h3>練習問題</h3>
+                <p>スプレッドシート制御を使って、以下の操作を行ってください。</p>
+                <ol>
+                    <li>スプレッドシートのセルA1の値を取得し、コンソールに出力してください。</li>
+                    <li>スプレッドシートのセルA1の値を"Hello, World!"に設定してください。</li>
+                </ol>
+                <button class="toggle-btn" onclick="toggleHint('hint7-1')">ヒントを表示</button>
+                <div id="hint7-1" class="hint">
+                    <p>スプレッドシートの操作：<br>
+                    <code>let sheet = SpreadsheetApp.openById('スプレッドシートID').getSheetByName('シート名');<br>
+                    let value = sheet.getRange('A1').getValue();<br>
+                    sheet.getRange('A1').setValue('新しい値');</code></p>
+                </div>
+                <button class="toggle-btn" onclick="toggleAnswer('answer7-1')">解答を表示</button>
+                <div id="answer7-1" class="answer">
+                    <pre><code>
+let sheet = SpreadsheetApp.openById('スプレッドシートID').getSheetByName('シート名');
+let value = sheet.getRange('A1').getValue();
+console.log(value);  // セルA1の値を出力
+
+sheet.getRange('A1').setValue('Hello, World!');
+                    </code></pre>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        function toggleHint(id) {
+            const hint = document.getElementById(id);
+            hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleAnswer(id) {
+            const answer = document.getElementById(id);
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
